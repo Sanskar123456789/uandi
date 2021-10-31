@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "projects": {
+    "uandi": {
+      "projectType": "application",
+      "root": "apps/uandi",
+      "sourceRoot": "apps/uandi/src",
+      "prefix": "uandi",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/uandi",
+            "index": "apps/uandi/src/index.html",
+            "main": "apps/uandi/src/main.ts",
+            "polyfills": "apps/uandi/src/polyfills.ts",
+            "tsConfig": "apps/uandi/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["apps/uandi/src/favicon.ico", "apps/uandi/src/assets"],
+            "styles": ["apps/uandi/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/uandi/src/environments/environment.ts",
+                  "with": "apps/uandi/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "uandi:build:production"
+            },
+            "development": {
+              "browserTarget": "uandi:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "uandi:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/uandi/src/**/*.ts",
+              "apps/uandi/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/uandi"],
+          "options": {
+            "jestConfig": "apps/uandi/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "uandi-e2e": {
+      "root": "apps/uandi-e2e",
+      "sourceRoot": "apps/uandi-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/uandi-e2e/cypress.json",
+            "devServerTarget": "uandi:serve:development",
+            "tsConfig": "apps/uandi-e2e/tsconfig.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "uandi:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/uandi-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["uandi"]
+    }
+  }
+}
