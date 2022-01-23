@@ -1,0 +1,50 @@
+<p-toast></p-toast>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<div class="service" *ngIf="data; else elseblock">
+    <div class="container">
+        <p-button label="New" icon="pi pi-plus" (click)="tonewBlog()"></p-button>
+        <br><br>
+    </div>
+<br><br>
+        <p-table [value]="data" responsiveLayout="scroll">
+            <ng-template pTemplate="caption">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    Services
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Offer Title</th>
+                    <th>Offer Code</th>
+                    <th>Description</th>
+                    <th>Percentage Off</th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-Offer>
+                <tr>
+                    <td>{{Offer.Offer_title}}</td>
+                    <td>{{Offer.Offer_code}}</td>
+                    <td>{{Offer.Offer_Description}}</td>
+                    <td>{{Offer.Offer_percentage}}</td>
+                    <td>
+                        <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success p-button-text" (click)="editService(Offer)"></button>
+                        <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text" (click)="deletedata(Offer._id)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    In total there are {{data ? data.length : 0 }} Offer(s).
+                </div>
+            </ng-template>
+        </p-table>
+        
+    
+
+</div>
+<ng-template #elseblock>
+    <div class="spinner">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+</ng-template>

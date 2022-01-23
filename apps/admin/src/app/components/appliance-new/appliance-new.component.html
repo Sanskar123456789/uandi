@@ -1,0 +1,47 @@
+<p-toast></p-toast>
+<div class="service" class="dashboard" *ngIf="services; else elseblock">
+    <div class="container">
+        <div class="form">
+            <form action="" [formGroup]="forms">
+                <div class="grid">
+                    <div class="col-6">
+                        <span class="p-float-label">
+                            <input id="float-input" type="text" formControlName="Appliances" pInputText> 
+                            <label for="float-input">Appliance Name</label>
+                            <!-- <small *ngIf="forms.Service_name.invalid" class="p-error">Please enter a service name</small> -->
+                        </span>
+                    </div>
+                    
+                    <div class="col-6">
+                        <input type="file" accept="image/*" class="p-inputtext" (change)="onImgup($event)"/>
+                        <label for="fileUpload" id="lab" >Image</label>
+                        <img [src]="img" id="img" alt=".">
+                    </div>
+
+                    <div class="col-12">
+                        <h1 id="h1">Select Services to join with This appliance</h1>
+                        <div class="p-field-checkbox" *ngFor="let service of services">
+                            <input type="checkbox" [value]="service._id" class="box" name="serv" (click)="serv(service._id)" [id]="service._id">
+                            <label class="label">{{service.Service_name}}</label>
+                        </div>
+                    </div>
+
+
+                    <div class="col-6">
+                        <br>
+                        <span class="p-float-label">
+                            <textarea id="float-input" formControlName="Appliances_description" pInputTextarea class="adj"></textarea>
+                            <label for="float-input">Discription</label>
+                        </span>
+                    </div>
+                </div>
+                <p-button label="Submit" (click)="submit()"></p-button>
+            </form>
+        </div>        
+    </div>
+</div>
+<ng-template #elseblock>
+    <div class="spinner">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+</ng-template>

@@ -1,0 +1,69 @@
+.p-inputtext {
+    width: 100%;
+    height: 65px;
+  }
+  .service {
+    margin-top: 20px;
+    .container {
+      display: flex;
+      padding: 20px;
+      border-radius: 12px;
+      background-color: var(--surface-card);
+      .form {
+        margin-top: 15px;
+      }
+    }
+  }
+  .adj {
+    width: 200%;
+    height: 300px;
+  }
+  #lab {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  #img {
+    margin: 10px;
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+  }
+  .box {
+    width: 20px;
+    height: 20px;
+    border-radius: 12px;
+  }
+  .label {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.589);
+    margin-left: 10px;
+    font-weight: lighter;
+  }
+  #h1 {
+    font-size: 150%;
+    color: #dbdbdb;
+    width: 50%;
+  }
+  @keyframes p-progress-spinner-color {
+    100%,
+    0% {
+        stroke: #d62d20;
+    }
+    40% {
+        stroke: #0057e7;
+    }
+    66% {
+        stroke: #008744;
+    }
+    80%,
+    90% {
+        stroke: #ffa700;
+    }
+}
+
+.spinner{
+    justify-content: center;
+    align-items:center;
+    content: center;
+    margin-left:40%;
+    margin-top:20%;
+}

@@ -1,0 +1,53 @@
+<div class="dashboard" *ngIf="data; else elseblock">
+    <div class="grid">
+        <div class="Usercount col-6">
+            <div class="mycard">
+                Total no of users are 
+                <span id="count">{{data[0].length}}</span>
+            </div>
+        </div>
+    
+        
+        <div class="Ordercount col-6">
+            <div class="mycard">
+                Total no of Services are 
+                <span id="count">{{data[2]}}</span>
+            </div>
+        </div>
+        <div class="Ordercount col-6">
+            <div class="mycard">
+                Total no of orders are 
+                <span id="count">{{data[1].length}}</span>
+            </div>
+        </div>
+
+        <div class="Ordercount col-6">
+            <div class="mycard">
+                Total Sales
+                <span id="count">{{totalSales | currency:'INR'}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid">
+        <div class="p-card col-5 mt-3 graph">
+            <p-chart type="line" [data]="basicData" [options]="basicOptions"></p-chart>
+        </div>
+        <div class="p-card col-5 mt-3 graph">
+            <p-chart type="line" [data]="basicData1" [options]="basicOptions"></p-chart>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="p-card col-5 mt-3 graph">
+            <p-chart type="line" [data]="basicData2" [options]="basicOptions"></p-chart>
+        </div>
+        <div class="p-card col-5 mt-3 graph">
+            <p-chart type="line" [data]="basicData3" [options]="basicOptions"></p-chart>
+        </div>
+    </div>
+</div>
+<ng-template #elseblock>
+    <div class="spinner">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+</ng-template>

@@ -1,0 +1,59 @@
+<p-toast></p-toast>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<div class="service" *ngIf="data; else elseblock">
+    <div class="container">
+        <p-button label="New" icon="pi pi-plus" (click)="tonewService()"></p-button>
+        <br><br>
+    </div>
+<br><br>
+
+        <p-table [value]="data" responsiveLayout="scroll">
+            <ng-template pTemplate="caption">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    Services
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Services</th>
+                    <th>Description</th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-App>
+                <tr>
+                    <td>{{App.Appliances}}</td>
+
+                    <td><img [src]= App.Appliances_image [alt]="App.Appliances" width="100" class="p-shadow-4" /></td>
+                    
+                    <!-- <td *ngIf="!App.Services.length"></td> -->
+                    <td>
+                        <ul>
+                            <li *ngFor="let service of App.Services">{{service.Service_name}}</li>
+                        </ul>
+                        
+                    </td>
+
+                    <td>
+                        {{App.Appliances_description}}
+                    </td>
+                    <td>
+                        <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success p-button-text" (click)="editService(App)"></button>
+                        <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text" (click)="deletedata(App._id)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    In total there are {{data ? data.length : 0 }} Appliance(s).
+                </div>
+            </ng-template>
+        </p-table>
+</div>
+<ng-template #elseblock>
+    <div class="spinner">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+</ng-template>

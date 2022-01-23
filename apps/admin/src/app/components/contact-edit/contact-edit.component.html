@@ -1,0 +1,52 @@
+<p-toast></p-toast>
+<div class="Contact">
+    <div class="container">
+        <p-card>
+        <div class="form">
+            <form action="" [formGroup]="forms">
+                <div class="grid">
+                    <div class="col-6">
+                        <span class="p-float-label">
+                            <input id="float-input" type="text" formControlName="Phone_no" pInputText> 
+                            <label for="float-input">Phone_no</label>
+                            <!-- <small *ngIf="forms.Service_name.invalid" class="p-error">Please enter a service name</small> -->
+                        </span>
+                    </div><div class="col-6">
+                        <span class="p-float-label">
+                            <input id="float-input" type="text" formControlName="emailId" pInputText> 
+                            <label for="float-input">Email Id</label>
+                            <!-- <small *ngIf="forms.Service_name.invalid" class="p-error">Please enter a service name</small> -->
+                        </span>
+                    </div><div class="col-6">
+                        <span class="p-float-label">
+                            <input id="float-input" type="text" formControlName="instaId" pInputText> 
+                            <label for="float-input">InstaGram Id</label>
+                            <!-- <small *ngIf="forms.Service_name.invalid" class="p-error">Please enter a service name</small> -->
+                        </span>
+                    </div><div class="col-6">
+                        <span class="p-float-label">
+                            <input id="float-input" type="text" formControlName="twitter" pInputText> 
+                            <label for="float-input">Twitter</label>
+                            <!-- <small *ngIf="forms.Service_name.invalid" class="p-error">Please enter a service name</small> -->
+                        </span>
+                    </div><div class="col-6">
+                        <span class="p-float-label">
+                            <input id="float-input" type="text" formControlName="facebook" pInputText> 
+                            <label for="float-input">Facebook</label>
+                            <!-- <small *ngIf="forms.Service_name.invalid" class="p-error">Please enter a service name</small> -->
+                        </span>
+                    </div>
+                    <div class="col-6">
+                        <span class="p-float-label">
+                            <input id="float-input" type="text" formControlName="youtube" pInputText> 
+                            <label for="float-input">youtube</label>
+                            <!-- <small *ngIf="forms.Service_name.invalid" class="p-error">Please enter a service name</small> -->
+                        </span>
+                    </div>
+                </div>
+                <p-button label="Submit" (click)="submit()"></p-button>
+            </form>
+        </div>  
+    </p-card>      
+    </div>
+</div>

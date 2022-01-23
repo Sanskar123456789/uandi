@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@uandi/login": ["libs/login/src/index.ts"],
+      "@uandi/models": ["libs/models/src/index.ts"],
+      "@uandi/service": ["libs/service/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

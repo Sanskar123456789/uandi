@@ -1,0 +1,50 @@
+<p-toast></p-toast>
+<div class="service">
+    <div class="container">
+        <div class="form">
+            <form action="" [formGroup]="forms">
+                <div class="grid">
+                    <div class="col-6">
+                        <span class="p-float-label">
+                            <input id="float-input" type="text" formControlName="Offer_title" pInputText> 
+                            <label for="float-input">Offer Title</label>
+                            <!-- <small *ngIf="forms.Service_name.invalid" class="p-error">Please enter a service name</small> -->
+                        </span>
+                    </div>
+
+                    <div class="col-6">
+                        <span class="p-float-label">
+                            <input id="float-input" type="number" formControlName="Offer_percentage" pInputText> 
+                            <label for="float-input">Offer Percentage</label>
+                            <!-- <small *ngIf="forms.Service_name.invalid" class="p-error">Please enter a service name</small> -->
+                        </span>
+                    </div>
+
+                    <div class="col-6">
+                        <span class="p-float-label">
+                            <input id="float-input" type="text" formControlName="Offer_code" pInputText> 
+                            <label for="float-input">Offer Code</label>
+                            <!-- <small *ngIf="forms.Service_name.invalid" class="p-error">Please enter a service name</small> -->
+                        </span>
+                    </div>
+
+                    <div class="col-6">
+                        <span class="p-float-label">
+                            <input id="float-input" type="text" formControlName="Offer_onBasisOfTotalAmount" pInputText> 
+                            <label for="float-input">Offer On a amount</label>
+                            <!-- <small *ngIf="forms.Service_name.invalid" class="p-error">Please enter a service name</small> -->
+                        </span>
+                    </div>
+
+                    <div class="col-6">
+                        <span class="p-float-label">
+                            <textarea id="float-input" formControlName="Offer_Description" pInputTextarea class="adj"></textarea>
+                            <label for="float-input">Discription</label>
+                        </span>
+                    </div>
+                </div>
+                <p-button label="Submit" (click)="submit()"></p-button>
+            </form>
+        </div>        
+    </div>
+</div>

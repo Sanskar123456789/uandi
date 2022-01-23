@@ -1,0 +1,56 @@
+<div class="user p-card" *ngIf="data; else elseblock">
+    <div class="personal-details">
+        <h3 class="pd">Personal Details</h3>
+        <div class="grid de">
+            <div class="col-4 det">Name  : <span id="data">{{data.Name}}</span></div>
+            <div class="col-4 det">Email :<span id="data">{{data.Email}}</span></div>
+            <div class="col-4 det">Phone :<span id="data">{{data.Phone_no}}</span></div>
+
+            <div class="col-4 det">Gender  :<span id="data">{{data.Gender}}</span></div>
+            <div class="col-4 det">date    :<span id="data">{{data.date | date}}</span></div>
+            <div class="col-4 det">Address :<span id="data">{{data.Address}}</span></div>
+        </div>
+    </div>
+    <div class="Order-details">
+        <h3 class="pd">Order History</h3>
+        <div>
+            <h4 *ngIf="orders.length===0"> No Order History</h4>
+        </div>
+        <p-table [value]="orders" responsiveLayout="scroll">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Order Status</th>
+                    <th>Services Ordered</th>
+                    <th>Total</th>
+                    
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-order>
+                <tr>
+                    <td>{{order.Order_Status}}</td>
+                    <td>
+                        <p *ngFor="let s of order.Service">{{s.Service_name}}</p>
+                    </td>
+                    <td>{{order.total_amount}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <h2 class="pd">Total Sales to this user is {{total}}</h2> 
+    </div>
+    <div class="wishlist">
+        <div class="caseWishlistempty">
+            <h4 *ngIf="wish.length===0" class="pd"> No Wish list in this user basket</h4>
+            <ul *ngIf="wish.length>0">
+                <h4 class="pd1">Wish List of user</h4>
+                <li id="lis">hello</li>
+                <li id="lis">hello</li>
+                <li *ngFor="let w of wish" id="lis"> {{w.Service_name}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<ng-template #elseblock>
+    <div class="spinner">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+</ng-template>

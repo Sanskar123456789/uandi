@@ -1,0 +1,68 @@
+<p-toast></p-toast>
+<div class="order p-card">
+    <div class="personal-details">
+        <h3 class="pd">Order Details</h3>
+        <div class="grid de">
+            <div class="col-4 det">date    :<span id="data">{{Orderdet.date | date}}</span></div>
+
+            <div class="col-4 det">Order Status  : <span id="data"><p-dropdown [options]="cities" [(ngModel)]="selectedCityCode" optionLabel="name" optionValue="code" (onChange)="getOS()"></p-dropdown></span></div>
+
+            <div class="col-4 det">Completed :<span id="data"><p-inputSwitch [(ngModel)]="isCompleted" (onChange)="getOS()"></p-inputSwitch></span></div>
+
+            <div class="col-4 det">Total Amount :<span id="data">{{Orderdet.total_amount}}</span></div>
+            
+        </div>
+    </div>
+    <div class="User-details">
+        <h3 class="pd">User Details</h3>
+        <div class="grid de">
+            <div class="col-4 det">Name    :<span id="data">{{Orderdet.User?.Name}}</span></div>
+    
+            <div class="col-4 det">Email  : <span id="data">{{Orderdet.User?.Email}}</span></div>
+    
+            <div class="col-4 det">Phone no :<span id="data">{{Orderdet.User?.Phone_no}}</span></div>
+    
+            <div class="col-4 det">Gender :<span id="data">{{Orderdet.User?.Gender}}</span></div>
+    
+            <div class="col-4 det">Address :<span id="data">{{Orderdet.User?.Address}}</span></div>
+            
+            <div class="col-4 det">Registration Date :<span id="data">{{Orderdet.User?.date | date}}</span></div>
+        </div>
+
+    </div>
+    
+    <h4> Services Ordered</h4>
+    <div class="Order-details">
+        <h3 class="pd">Order History</h3>
+        <div>
+            <h4 *ngIf="serv.length===0"> No Order History</h4>
+        </div>
+        <p-table [value]="serv" responsiveLayout="scroll">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th>For a appliance</th>
+                    <th>Description</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-service>
+                <tr>
+                    <td>{{service.Service_name}}</td>
+                    <td><img [src]= service.Service_image [alt]="service.Service_name" width="100" class="p-shadow-4" /></td>
+                    <td>{{service.Service_rate | currency:'INR'}}</td>
+                    
+                    <td *ngIf="service.Is_Service_appliance">
+                        <p-tag styleClass="p-mr-2" icon="pi pi-check" severity="success"></p-tag>
+                    </td>
+                    <td *ngIf="!service.Is_Service_appliance">
+                        <p-tag styleClass="p-mr-2" icon="pi pi-times" severity="danger"></p-tag>
+                    </td>
+                    <td>
+                        {{service.Service_description}}
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+</div>

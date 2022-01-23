@@ -1,0 +1,48 @@
+<p-toast></p-toast>
+<div class="service" *ngIf="data; else elseblock">
+    <div class="container">
+        <p-button label="Edit" icon="pi pi-pencil" (click)="toeditContact()"></p-button>
+        <br><br>
+    </div>
+<br><br>
+        <p-table [value]="data" responsiveLayout="scroll">
+            <ng-template pTemplate="caption">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    Contact
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>InstaId</th>
+                    <th>twitter</th>
+                    <th>facebook</th>
+                    <th>youtube</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-contact>
+                <tr>
+                    <td>{{contact.Phone_no}}</td>
+                    <td>{{contact.emailId}}</td>
+                    <td>{{contact.instaId}}</td>
+                    <td>{{contact.twitter}}</td>
+                    <td>{{contact.facebook}}</td>
+                    <td>{{contact.youtube}}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    You can have Only 1 contact Information
+                </div>
+            </ng-template>
+        </p-table>
+        
+    
+
+</div>
+<ng-template #elseblock>
+    <div class="spinner">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+</ng-template>

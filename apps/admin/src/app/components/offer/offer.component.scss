@@ -1,0 +1,33 @@
+.service {
+    margin-top: 20px;
+    .container {
+      display: flex;
+      padding: 12px;
+      background-color: rgb(218, 212, 212);
+      border-radius: 12px;
+    }
+  }
+  @keyframes p-progress-spinner-color {
+    100%,
+    0% {
+        stroke: #d62d20;
+    }
+    40% {
+        stroke: #0057e7;
+    }
+    66% {
+        stroke: #008744;
+    }
+    80%,
+    90% {
+        stroke: #ffa700;
+    }
+}
+
+.spinner{
+    justify-content: center;
+    align-items:center;
+    content: center;
+    margin-left:40%;
+    margin-top:20%;
+}

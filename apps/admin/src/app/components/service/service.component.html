@@ -1,0 +1,60 @@
+<p-toast></p-toast>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<div class="service" *ngIf="data; else elseblock">
+    <div class="container">
+        <p-button label="New" icon="pi pi-plus" (click)="tonewService()"></p-button>
+        <br><br>
+    </div>
+<br><br>
+        <p-table [value]="data" responsiveLayout="scroll">
+            <ng-template pTemplate="caption">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    Services
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th>For a appliance</th>
+                    <th>Description</th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-service>
+                <tr>
+                    <td>{{service.Service_name}}</td>
+                    <td><img [src]= service.Service_image [alt]="service.Service_name" width="100" class="p-shadow-4" /></td>
+                    <td>{{service.Service_rate | currency:'INR'}}</td>
+                    
+                    <td *ngIf="service.Is_Service_appliance">
+                        <p-tag styleClass="p-mr-2" icon="pi pi-check" severity="success"></p-tag>
+                    </td>
+                    <td *ngIf="!service.Is_Service_appliance">
+                        <p-tag styleClass="p-mr-2" icon="pi pi-times" severity="danger"></p-tag>
+                    </td>
+                    <td>
+                        {{service.Service_description}}
+                    </td>
+                    <td>
+                        <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success p-button-text" (click)="editService(service)"></button>
+                        <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text" (click)="deletedata(service._id)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    In total there are {{data ? data.length : 0 }} Services.
+                </div>
+            </ng-template>
+        </p-table>
+        
+    
+
+</div>
+<ng-template #elseblock>
+    <div class="spinner">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+</ng-template>

@@ -1,0 +1,61 @@
+<p-toast></p-toast>
+<div class="service" *ngIf="data; else elseblock">
+    <!-- <div class="container">
+        <p-button label="Edit" icon="pi pi-pencil" (click)="toseeDetails()"></p-button>
+        <br><br>
+    </div> -->
+<br><br>
+        <p-table [value]="data" responsiveLayout="scroll">
+            <ng-template pTemplate="caption">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    Contact
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone_no</th>
+                    <th>Address</th>
+                    <th>Gender</th>
+                    <th>isAdmin</th>
+                    <th>date</th>
+                    <th>See details</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-user>
+                <tr>
+                    <td>{{user.Name}}</td>
+                    <td>{{user.Email}}</td>
+                    <td>{{user.Phone_no}}</td>
+                    <td>{{user.Address}}</td>
+                    <td>{{user.Gender}}</td>
+
+                    <td *ngIf="user.isAdmin">
+                        <p-tag styleClass="p-mr-2" icon="pi pi-check" severity="success"></p-tag>
+                    </td>
+                    <td *ngIf="!user.isAdmin">
+                        <p-tag styleClass="p-mr-2" icon="pi pi-times" severity="danger"></p-tag>
+                    </td>
+                    
+                    <td>{{user.date | date}}</td>
+                    <td>
+                        <p-button label="See details" icon="pi pi-search" (click)="toseeDetails(user._id)"></p-button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    In total there are {{data ? data.length : 0 }} Blog (s).
+                </div>
+            </ng-template>
+        </p-table>
+        
+    
+
+</div>
+<ng-template #elseblock>
+    <div class="spinner">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+</ng-template>

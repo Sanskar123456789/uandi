@@ -1,0 +1,24 @@
+<div class='bold-line'></div>
+<div class='container'>
+  <div class='window'>
+    <div class='overlay'></div>
+    <div class='content'>
+      <div class='welcome'>Hello There!</div>
+      <div class='subtitle'>something catchy</div>
+      <div class='input-fields'>
+        <form action="" [formGroup]="forms">
+        <input *ngIf="stage ===1" type='email' placeholder='Email' formControlName="emailId" class='input-line full-width'>
+        <input *ngIf="stage ===2" type='text' placeholder='OTP' [attr.disabled]="true" formControlName="otp" class='input-line full-width'>
+        <input *ngIf="stage ===3" type='text' placeholder='OTP' formControlName="otp" class='input-line full-width'>
+        <input *ngIf="stage ===4" type='password' placeholder='Password' formControlName="password" class='input-line full-width'>
+      </form>
+      </div>
+      <div>
+        <button *ngIf="stage ===1" class='ghost-round full-width' (click)="getemailid()">Enter Email id</button>
+        <button *ngIf="stage ===2" class='ghost-round full-width' (click)="enableOTP()">Generate OTP</button>
+        <button *ngIf="stage ===3" class='ghost-round full-width' (click)="checkOTP()">Submit OTP</button>
+        <button *ngIf="stage ===4" class='ghost-round full-width' (click)="token()">Login</button>
+      </div>
+      </div>
+    </div>
+  </div>

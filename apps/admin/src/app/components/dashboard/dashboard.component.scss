@@ -1,0 +1,53 @@
+.mycard{
+    width: 70%;
+    padding:15px;
+    justify-content: center;
+    align-items: center;
+    margin-top:20px;
+    background-image: linear-gradient(#cc2b5e ,#753a88);
+    border-radius: 12px;
+    // height: 150px;
+    height: inherit;
+    color:white;
+    font-size:2em;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    #count{
+        color:black;
+        font-size:1.2em;
+    }
+}
+.graph{
+    margin:20px;
+}
+
+@media screen and(max-width: 710px) {
+    .graph{
+        width:80%;
+        margin-left: 10%;
+    }
+  }
+
+  @keyframes p-progress-spinner-color {
+    100%,
+    0% {
+        stroke: #d62d20;
+    }
+    40% {
+        stroke: #0057e7;
+    }
+    66% {
+        stroke: #008744;
+    }
+    80%,
+    90% {
+        stroke: #ffa700;
+    }
+}
+
+.spinner{
+    justify-content: center;
+    align-items:center;
+    content: center;
+    margin-left:40%;
+    margin-top:20%;
+}
