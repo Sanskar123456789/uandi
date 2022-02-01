@@ -1,78 +1,8 @@
-header {
-  .dis {
-    display: none;
-  }
-  .sidebar {
-    position: absolute;
-    margin-top: 10px;
-    margin-left: 10px;
-    animation: animate 0.1s ease-in 1;
-    width: 70%;
-    z-index: 2;
-    background-color: var(--surface-d);
-    .container {
-      i {
-        color: red;
-        font-size: 1.5em;
-        margin-left: 80%;
-        margin-top: 10px;
-      }
-      .list {
-        display: block;
-        ul {
-          padding: 0px 0px 0px 0px;
-          li {
-            padding-top: 20px;
-            padding-left: 40px;
-            list-style-type: none;
-            width: 100%;
-            color: rgba(207, 204, 204, 0.76);
-            height: 50px;
-          }
-          li:hover {
-            background-color: var(--surface-a);
-          }
-        }
-      }
-    }
-  }
-  p-card {
-    .grid {
-      .pi {
-        color: red;
-        font-size: 1.5em;
-      }
-    }
-  }
-}
-
-p-toolbar {
-  display: none;
-}
-
-@media screen and(min-width: 710px) {
-  .bars {
-    display: none;
-  }
-  p-toolbar {
-    display: contents;
-  }
-
-  .cart {
-    cursor: pointer;
-    display: none;
-  }
-
-  .sidebar {
-    display: none;
-  }
-}
-
-@keyframes animate {
-  0% {
-    width: 0%;
-  }
-  100% {
-    width: 70%;
+header{
+  .p-toolbar {
+    background: #fbc50399;
+    border: 1px solid #e9be289e;
+    padding: 1rem;
+    border-radius: 3px;
   }
 }

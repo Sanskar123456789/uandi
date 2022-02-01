@@ -1,0 +1,84 @@
+<img src="assets/photos/banner.png" alt="banner" id="img">
+<!-- <uandi-service-template></uandi-service-template> -->
+<p-carousel [value]="app" class="screen" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1" [circular]="true" [autoplayInterval]="2000" *ngIf="app" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+        <h5>Appliances</h5>
+    </ng-template>
+    <ng-template let-app pTemplate="item" class="padding">
+        <div class="app" (click)="showAppliance(app._id)">
+            <div class="image">
+                <img src="{{app.Appliances_image}}" [alt]="app.Appliances" class="product-image" />
+            </div>
+            <div class="name">
+                {{app.Appliances}}
+            </div>
+            <div class="description">
+                {{app.Appliances_description}}
+            </div>
+        </div>
+    </ng-template>
+</p-carousel>
+
+<p-carousel [value]="cat" class="screen" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1" [circular]="true" [autoplayInterval]="2000" *ngIf="cat" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+        <h5>Category</h5>
+    </ng-template>
+    
+    <ng-template let-app pTemplate="item" class="padding">
+        <div class="app" (click)="showCategory(app._id)">
+            <div class="image">
+                <img src="{{app.Service_image}}" [alt]="app.CategoryOfService" class="product-image" />
+            </div>
+            <div class="name">
+                {{app.CategoryOfService}}
+            </div>
+            <div class="description">
+                {{app.Service_description}}
+            </div>
+        </div>
+    </ng-template>
+</p-carousel>
+
+<p-carousel [value]="app" class="mobile" *ngIf="app">
+    <ng-template pTemplate="header">
+        <h5>Appliances</h5>
+    </ng-template>
+    
+        <ng-template let-app pTemplate="item" class="padding">
+            <div class="app" (click)="showAppliance(app._id)">
+                <div class="image">
+                    <img src="{{app.Appliances_image}}" [alt]="app.Appliances" class="product-image" />
+                </div>
+                <div class="name">
+                    {{app.Appliances}}
+                </div>
+                <div class="description">
+                    {{app.Appliances_description}}
+                </div>
+            </div>
+        </ng-template>
+    
+</p-carousel>
+
+<p-carousel [value]="cat" class="mobile" *ngIf="cat">
+    <ng-template pTemplate="header">
+        <h5>Category</h5>
+    </ng-template>
+    
+        <ng-template let-app pTemplate="item" class="padding">
+            <div class="app" (click)="showCategory(app._id)">
+                <div class="image">
+                    <img src="{{app.Service_image}}" [alt]="app.CategoryOfService" class="product-image" />
+                </div>
+                <div class="name">
+                    {{app.CategoryOfService}}
+                </div>
+                <div class="description">
+                    {{app.Service_description}}
+                </div>
+            </div>
+        </ng-template>
+    
+</p-carousel>
+
+<<a href="https://wa.me/919628853634" class="whatsapp_float" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>

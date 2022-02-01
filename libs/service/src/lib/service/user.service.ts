@@ -29,4 +29,12 @@ export class UserService {
   checkOTP(data:{otp:string,actualOtp:string}):Observable<any>{
     return this.http.post<any>(`${this.api}/otpCheck`,data)
   }
+
+  getOTP1(data:{Email:string}):Observable<any>{
+    return this.http.post<any>(`${this.api}/otpcheck`,data);
+  }
+
+  newUser(data:User):Observable<User>{
+    return this.http.post<User>(`${this.api}/newUser`,data)
+  }
 }

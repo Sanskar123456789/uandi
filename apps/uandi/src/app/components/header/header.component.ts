@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SubjectService } from '@uandi/service';
 
 @Component({
   selector: 'uandi-header',
@@ -8,49 +9,28 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  z = 1;
+  z = true;
   bars: any;
-  constructor(private router : Router, private routes:ActivatedRoute) { 
-    this.z = 0;
-    this.bars = document.querySelector('.bars')
+  constructor(private router : Router, private routes:ActivatedRoute,private subject:SubjectService) { 
+   
   }
 
   ngOnInit(): void {
-    this.z=0;
-  }
-
-  tohome(): void {
-    console.log('tohome');
-    this.router.navigate(['/']);
-  }
-
-  toabout(){
-    return
-  }
-
-  toservices(){
-    return
-  }
-
-  toblog(){
-    return
-  }
-
-  toapp(){
-    return
-  }
-
-  tologin(){
-    return
+    this.subject.zValue.subscribe(z=>{
+      this.z = z;
+    })
   }
 
   toggle(){
-    if(this.z==0){
-      this.z = 1;
+    if(this.z==true){
+      this.z=false;
+      this.subject.zValue.next(this.z);
     }else{
-      this.z = 0;
+      this.z=true;
+      this.subject.zValue.next(this.z);
     }
   }
-  
+
+    
  
 }

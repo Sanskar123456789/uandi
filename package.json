@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^12.2.0",
     "@angular/router": "^12.2.0",
     "@nrwl/angular": "13.1.2",
+    "animate.css": "^4.1.1",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "chart.js": "^3.7.0",

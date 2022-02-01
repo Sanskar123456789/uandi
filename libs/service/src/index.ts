@@ -8,4 +8,6 @@ export * from './lib/service/order.service';
 export * from './lib/service/analytics.service'
 export * from './lib/service/category.service'
 export * from './lib/service/auth-guard.service'
+export * from './lib/service/user-auth-guard.service'
+export * from './lib/service/subject.service'
 export * from './lib/service/jwtinterceptor.interceptor'

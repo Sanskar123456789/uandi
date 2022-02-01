@@ -1,4 +1,5 @@
 import {Order} from './Order';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { service } from '@uandi/models';
 export class User{
     Name ?: string;

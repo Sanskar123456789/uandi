@@ -1,0 +1,32 @@
+.sidebar{
+    transition: all .5s ease-in-out;
+    height:100%;
+    width:40%;
+    position:fixed;
+    z-index: 2;
+    background-color: black !important;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1em;
+    margin-left: -18px;
+    ul{
+        display:block;
+        color:rgba(248, 248, 248, 0.463);
+        padding:0;
+        list-style-type:none;
+        padding: 12px;
+    }
+    i{
+        float:right;
+    }
+    li{
+        padding: 15px;
+        margin-bottom:5px;
+        width:100%;
+    }
+    li:hover{
+        color:rgb(255, 251, 251);
+        cursor: pointer;
+    }
+
+}
+

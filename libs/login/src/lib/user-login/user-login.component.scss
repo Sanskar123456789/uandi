@@ -1,0 +1,44 @@
+.container{
+    width: 100%;
+    .card{
+        margin-top:5%;
+        text-align: center;
+        margin-left: 20%;
+        background: #ffffff;
+        color: #495057;
+        box-shadow: 0 2px 1px -1px rgb(0 0 0 / 40%), 0 1px 1px 0 rgb(0 0 0 / 42%), 0 1px 3px 0 rgb(0 0 0 / 42%);
+        border-radius: 3px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        font-size: 1rem;
+        font-weight: normal;
+        box-sizing: border-box;
+        width:60%;
+        height: inherit;
+        padding:30px;
+
+        .input-fields{
+            form{
+                .inputs{
+                    display:flex;
+                    flex-wrap: wrap;
+                    span{
+                        margin: 12px;
+                        input{
+                            width:80%;
+                        }
+                        label{
+                            margin-left: 10%;
+                        }
+                        #add{
+                            margin-left:13%;
+                            margin-top: 1%;
+                        }
+                        textarea{
+                            width:80%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

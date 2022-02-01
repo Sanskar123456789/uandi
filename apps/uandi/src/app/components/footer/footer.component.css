@@ -1,0 +1,101 @@
+.footer {
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  background-color: #051b35 !important;
+  width: 100%;
+  /* padding-bottom: 150px; */
+  padding: 10px 50px 0px 50px;
+}
+.table {
+  /* display: flex; */
+  color: #fff !important;
+}
+
+.head {
+  color: #fff;
+  margin: 20px;
+  font-size: larger;
+  list-style-type:none ;
+}
+.in {
+  margin: 20px;
+  color: #ffffffb3;
+  flex-wrap: wrap;
+}
+.in:hover {
+  color: white;
+  cursor: pointer;
+}
+.label {
+  font-size: 0.8em;
+  color: #ffffffb3;
+}
+.news {
+  display: flex;
+}
+#img {
+  width: 35%;
+  height: 25%;
+  border-radius: 12px;
+  margin-top: 12px;
+}
+.art {
+  width: 30%;
+}
+.box {
+  background-color: #0f233bda !important;
+  border-radius: 12px;
+  padding: 30px;
+}
+.fle {
+  display: flex;
+}
+#inputPassword {
+  width: 75%;
+  height: 50px;
+}
+.btn1 {
+  margin-top: 0px;
+  margin-left: 5%;
+  width: 20%;
+  height: 50px;
+  padding:5px;
+}
+
+#line {
+  color: #ffffffb3;
+  width: 100%;
+}
+.section {
+  display: flex;
+}
+.section1 {
+  color: #ffffffb3;
+  width: 50%;
+}
+.section2 {
+  text-align: end;
+  color: #ffffffb3;
+  width: 50%;
+}
+.in1 {
+  color: #ffffffb3;
+  flex-wrap: wrap;
+}
+.in1:hover {
+  color: white;
+  cursor: pointer;
+}
+#in{
+  width: 70%;
+}
+@media screen and (max-width: 750px) {
+  .hide{
+    display: none;
+  }  
+  .col-4{
+    width:50%;
+  }
+}

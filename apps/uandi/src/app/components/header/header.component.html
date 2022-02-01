@@ -1,50 +1,15 @@
-<header>
-    <div  [ngClass]= "z===1?'sidebar':'dis'">
-        <div class="container">
-            <i class="pi pi-times bars" (click)="toggle()"></i>
-            <div class="list">
-                <ul>
-                    <li (click)="tohome()">Home</li>
-                    <li>About us</li>
-                    <li>Appliances</li>
-                    <li>Services</li>
-                    <li>Blog</li>
-                    <li>Login</li>
-                </ul>
+<header>    
+    <p-toolbar>
+        <div class="p-toolbar-group-left">
+            <div class="logo">
+                <p>LOGO</p>
             </div>
         </div>
-    </div>
-    <p-card styleClass="shadow-6">
-        <div class="grid">
-            <div class="col-5">
-                <i class="pi pi-bars bars"(click)="toggle()"></i>
-            </div>
-            <div class="col-5 -mt-4" >
-                <p> Logo </p>            
-            </div>
-            <div class="col-2 cart">
-                <i class="pi pi-shopping-cart bars"></i>
-            </div>
-        </div>        
-        <p-toolbar>
-            <div class="p-toolbar-group-left">
-                <div class="grid">
-                    <div class="col-1" class="mr-3 mt-1"><p-button label="Home"           icon="pi pi-fw pi-home"     styleClass="p-button-danger" id="home"     (click)="tohome()"    ></p-button></div>
-                    <div class="col-1" class="mr-3 mt-1"><p-button label="About us"       icon="pi pi-info-circle"    styleClass="p-button-info" id="about"    (click)="toabout()"   ></p-button></div>
-                    <div class="col-1" class="mr-3 mt-1"><p-button label="Services"       icon="pi pi-fw pi-calendar" styleClass="p-button-primary" id="services" (click)="toservices()"></p-button></div>
-                    <div class="col-1" class="mr-3 mt-1"><p-button label="Blog"           icon="pi pi-fw pi-file"     styleClass="p-button-info" id="blog"     (click)="toblog()"    ></p-button></div>
-                    <div class="col-1" class="mr-3 mt-1"><p-button label="Appliances"     icon="pi pi-fw pi-pencil"   styleClass="p-button-primary" id="app"      (click)="toapp()"     ></p-button></div>
-                    <div class="col-1" class="mr-3 mt-1"><p-button label="Login/register" icon="pi pi-fw pi-cog"      styleClass="p-button-secondary" id="login"    (click)="tologin()"     ></p-button></div>
-                </div>
-            </div>
-            
-            <div class="p-toolbar-group-right mt-2">
-                <p-button icon="pi pi-shopping-cart"class="mr-1" styleClass="p-button-success"></p-button>
-                <p-button icon="pi pi-arrow-right"class="mr-1" styleClass="p-button-danger"></p-button>
-            </div>
-        </p-toolbar>
-        </p-card>
-        
-
-
+        <div class="p-toolbar-group-right">
+            <p-button icon="pi pi-user" class="ml-2"></p-button>
+            <p-button icon="pi pi-star" class="ml-2" styleClass="p-button-danger"></p-button>
+            <p-button icon="pi pi-shopping-cart" class="ml-2" styleClass="p-button-success"></p-button>
+        </div>
+    </p-toolbar>
 </header>
+

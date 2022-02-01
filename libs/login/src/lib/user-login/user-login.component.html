@@ -1,0 +1,78 @@
+<div class="container">
+    <div class="card">
+        <div class='input-fields'>
+            <form action="" [formGroup]="forms1" *ngIf="stage ===1">
+                <div class="inputs grid">
+
+                    <span class="p-float-label" *ngIf="stage ===1" >
+                        <input id="float-input1" type="text" pInputText formControlName="Email"> 
+                        <label for="float-input1">EmailId</label>
+                    </span>
+
+                    <span class="p-float-label" *ngIf="stage ===1" >
+                        <input id="float-input2" type="text" pInputText formControlName="Name"> 
+                        <label for="float-input2">Name</label>
+                    </span>
+
+                    <span class="p-float-label" *ngIf="stage ===1" >
+                        <input id="float-input3" type="text" pInputText formControlName="Phone_no"> 
+                        <label for="float-input3">Phone Number</label>
+                    </span>
+
+                    <span class="p-float-label col-12" *ngIf="stage ===1">
+                        <textarea id="float-input4" rows="5" cols="30" pInputTextarea [autoResize]="true" formControlName="Address"></textarea>
+                        <label for="float-input4" id="add">Address</label>
+                    </span>
+
+                    <span class="p-float-label" *ngIf="stage ===1" >
+                        <!-- <input id="float-input5" type="text" pInputText formControlName="Gender"> xsxsd -->
+                        <p-dropdown [options]="genders" formControlName="Gender"  optionLabel="name"></p-dropdown>
+                        <label for="float-input5">Gender</label>
+                    </span>
+
+                    <span class="p-float-label" *ngIf="stage ===1" >
+                        <input id="float-input6" type="password" pInputText formControlName="password"> 
+                        <label for="float-input6">Password</label>
+                    </span>
+                </div>
+                <p-button label="Submit" (click)="submit()"></p-button>
+            </form>
+
+            <form action="" [formGroup]="forms" *ngIf="stage ===2">
+                <div class="inputs">
+                    <span class="p-float-label" >
+                        <input id="float-input1" type="text" pInputText formControlName="emailId"> 
+                        <label for="float-input1">EmailId</label>
+                    </span>
+    
+                    <span class="p-float-label">
+                        <input id="float-input2" type="password" pInputText formControlName="password"> 
+                        <label for="float-input2">Password</label>
+                    </span>
+                </div>
+                <p-button label="Submit" (click)="login()"></p-button>
+            </form>
+
+            <form action="" [formGroup]="forms2" *ngIf="stage ===3 || stage ===4">
+                <h1>OTP Has been sent to your email id please verify your email id</h1>
+
+                <span class="p-float-label">
+                    <input id="float-input2" type="text" pInputText formControlName="otp"> 
+                    <label for="float-input2">OTP</label>
+                </span>
+                <br>
+                <br>
+                <p-button label="Submit" (click)="submitOtp()"></p-button>
+            </form>
+
+            
+        </div>
+
+        <div class="options">
+            <p-button label="Register New User.." styleClass="p-button-link" *ngIf="stage ===2" (click)="stage1()"></p-button>
+            <p-button label="Forgot password.." styleClass="p-button-link" *ngIf="stage ===2" (click)="forgotpassword()"></p-button>
+            <p-button label="Already a User.." styleClass="p-button-link" *ngIf="stage ===1" (click)="stage2()"  ></p-button>
+            <p-button label="Change Email Id.." styleClass="p-button-link" *ngIf="stage ===3" (click)="stage2()"  ></p-button>
+        </div>
+    </div>
+</div>

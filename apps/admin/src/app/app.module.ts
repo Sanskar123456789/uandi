@@ -42,12 +42,11 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CategoryComponent } from './components/category/category.component';
 import { CategoryNewComponent } from './components/category-new/category-new.component';
 import {DropdownModule} from 'primeng/dropdown';
-
-
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import { LoginModule } from '@uandi/login';
 import { ShellComponentComponent } from './components/shell-component/shell-component.component';
 import {AuthGuardService, JwtinterceptorInterceptor} from '@uandi/service'
+
 const UI = [
   DropdownModule,
   ChartModule,
@@ -73,7 +72,7 @@ const routes : Routes =
   path:'',
   component:ShellComponentComponent,
   canActivate:[AuthGuardService],
-  // redirectTo:'home',
+    
   children: [
   {path: 'home',
     component: DashboardComponent,

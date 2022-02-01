@@ -1,3 +1,5 @@
+$base-color: #fd7e14;
+$base-color-2:#ffc107;
 /* You can add global styles to this file, and also import other style files */
 @import '~primeicons/primeicons.css';
 @import '~primeng/resources/themes/saga-blue/theme.css';
@@ -7,4 +9,9 @@
 
 // theme
 
-@import '~primeng/resources/themes/bootstrap4-dark-purple/theme.css';
+// @import '~primeng/resources/themes/bootstrap4-dark-purple/theme.css';
+@import '~primeng/resources/themes/saga-orange/theme.css';
+
+//animation
+@import '~animate.css/animate.css';
+

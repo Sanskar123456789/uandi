@@ -11,6 +11,7 @@ export class ShellComponentComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    // console.log("shell");
   }
 
 }
