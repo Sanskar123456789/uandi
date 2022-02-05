@@ -1,12 +1,15 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { UserService } from '@uandi/service';
+import { SubjectService, UserService } from '@uandi/service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {User} from '@uandi/models'
+import{SocialAuthService} from 'angularx-social-login';
+import { GoogleLoginProvider} from 'angularx-social-login';
+
 interface Gender {
   name: string,
   code: string
@@ -22,17 +25,29 @@ export class UserLoginComponent implements  OnInit,OnDestroy {
   forms!: FormGroup;
   forms1!: FormGroup;
   forms2!: FormGroup;
+  forms3!: FormGroup;
+  forms4!: FormGroup;
   email = "";
   endsub$:Subject<any> = new Subject();
   otp = "";
   c=0;
   genders:Gender[] =[]
   UserData:User={};
+  guser : any;
   constructor(
     private userService: UserService,
     private formbuilder:FormBuilder,
     private routes:ActivatedRoute,
-    private router:Router) { 
+    private router:Router,
+    private subject: SubjectService,
+    ngZone:NgZone,
+    private authService:SocialAuthService
+    ) { 
+
+      // window['onSignIn'] = (user: any) => ngZone.run(() =>{
+      //   this.afterSignUp(user);
+      // })
+      
       this.genders=[{
         name:"Male",
         code:"Male"
@@ -44,8 +59,7 @@ export class UserLoginComponent implements  OnInit,OnDestroy {
       {
         name:"Others",
         code:"Others"
-      }
-    ]
+      }]
     }
 
   ngOnDestroy(){
@@ -54,31 +68,68 @@ export class UserLoginComponent implements  OnInit,OnDestroy {
   }
 
   ngOnInit(): void {
+    this.stage =2;
     this._formInit();
     this._formInit1();
     this._formInit2();
+    this._formInit3();
+    this._formInit4();
+    this.authService.authState.subscribe((user)=>{
+      this.guser = user;
+      this.forms1.controls.Name.setValue(this.guser.name);
+      this.forms1.controls.Email.setValue(this.guser.email);
+      this.stage = 6;
+    })
   }
+
+  signinWithGoogle(){
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  signOut(){
+    this.authService.signOut();
+  }
+
   private _formInit(){
     this.forms = this.formbuilder.group({
       emailId:['',[Validators.required,Validators.email]],
       password:['',Validators.required],
     })
   }  
+
   private _formInit1(){
     this.forms1 = this.formbuilder.group({
       Name:['', Validators.required],
       Email:['',[Validators.required,Validators.email]],
       password:['',Validators.required],
-      Phone_no : ['',Validators.required],
-      Address : ['', Validators.required],
+      Phone_no : ['',],
+      Address : ['',],
       Gender :['Male'],
     })
   }  
+
   private _formInit2(){
     this.forms2 = this.formbuilder.group({
       otp:['', Validators.required],
     })
   } 
+
+  private _formInit3(){
+    this.forms3 = this.formbuilder.group({
+      password:['',Validators.required],
+      password1:['',Validators.required],
+    })
+  }  
+
+  private _formInit4(){
+    this.forms4 = this.formbuilder.group({
+      password:['',Validators.required],
+    })
+  }  
+
+  afterSignUp(user:any){
+    this.guser = user;
+  }
   
   stage2(){
     this.stage = 2;
@@ -106,10 +157,9 @@ export class UserLoginComponent implements  OnInit,OnDestroy {
     Address : this.forms1.controls.Address.value,
     Gender :gen,
   }
-    console.log(data);
+    
     this.UserData = data;
     this.userService.getOTP1({Email:data.Email}).pipe(takeUntil(this.endsub$)).subscribe(data => {
-      
       if(data.success){
         this.stage = 3;
         this.otp = data.otp;
@@ -122,15 +172,23 @@ export class UserLoginComponent implements  OnInit,OnDestroy {
     {
       otp:this.forms2.controls.otp.value,
       actualOtp:this.otp
-    }
-    
+    }    
     this.userService.checkOTP(data).subscribe(res=>{
       if(res.success){
-        this.userService.newUser(this.UserData).pipe(takeUntil(this.endsub$)).subscribe(res=>{
-          this.stage=2;
-          this.forms.controls.emailId.setValue(res.Email);
-        })
-      }else{
+        if(this.stage == 4){
+          this.stage = 5;
+        }
+        else{
+          this.userService.gUser(this.UserData).pipe(takeUntil(this.endsub$)).subscribe(res=>{
+            if(res.success){
+              alert(res.message);
+            }
+            this.stage=2;
+            this.forms.controls.emailId.setValue(res.Email);
+          })
+        }
+      }
+      else{
         this.c++;
         if(this.c==3){
           this.stage=1;
@@ -140,21 +198,6 @@ export class UserLoginComponent implements  OnInit,OnDestroy {
     
   }
   
-  // getemailid(){
-  //   this.email = this.forms.controls.emailId.value;
-  //   this.stage = 2;
-  // }
-
-  // enableOTP(){
-  //   this.stage = 3;
-  //   const data = {
-  //     Email: this.email
-  //   }
-  //   this.userService.getOTP(data).subscribe(res=>{
-  //     this.otp = res.otp;
-  //   })
-  // }
-
   login(): void {
     const data = {
       Email: this.forms.controls.emailId.value,
@@ -164,6 +207,10 @@ export class UserLoginComponent implements  OnInit,OnDestroy {
       if(token.success){
         localStorage.setItem('token', JSON.stringify(token.token));
         localStorage.setItem('email',JSON.stringify(token.email));
+        localStorage.setItem('id',JSON.stringify(token.UserData._id));
+        localStorage.setItem('cart',JSON.stringify(token.UserData.Cart.length));
+        localStorage.setItem('wishlist',JSON.stringify(token.UserData.User_Wishlist.length));
+        this.stage = 2;
         this.router.navigate(['/home'])
       }else{
         alert(token.msg);
@@ -172,9 +219,49 @@ export class UserLoginComponent implements  OnInit,OnDestroy {
   }
 
   forgotpassword(){
-    this.email = this.forms.controls.emailId.value;
-    this.stage = 4;
+    this.userService.getOTP1({Email:this.forms.controls.emailId.value}).pipe(takeUntil(this.endsub$)).subscribe(data => {
+      if(data.success){
+        this.stage = 4;
+        this.otp = data.otp;
+      }
+    })
   }
 
+  changePassword(){
+    if(this.forms3.controls.password.value == this.forms3.controls.password1.value){
+      const data={
+        Email:this.forms.controls.emailId.value,
+        password:this.forms3.controls.password.value
+      }
+      this.userService.updatePassword(data).pipe(takeUntil(this.endsub$)).subscribe(data=>{
+        if(data.success){
+          this.stage = 2
+        }
+      })
+    }
+  }
+
+  setPassword(){
+    if(this.forms4.invalid)return
+    this.forms1.controls.password.setValue(this.forms4.controls.password.value);
+    
+    const data={
+      Name:this.forms1.controls.Name.value,
+      Email:this.forms1.controls.Email.value,
+      password:this.forms1.controls.password.value,
+      Phone_no : this.forms1.controls.Phone_no.value,
+      Address : this.forms1.controls.Address.value,
+      Gender :this.forms1.controls.Gender.value,
+    }
+
+    this.userService.gUser(data).pipe(takeUntil(this.endsub$)).subscribe(data=>{
+      if(data.success){
+        alert(data.message);
+      }
+      this.stage=2;
+      this.forms.controls.emailId.setValue(data.Email);
+    })
+      
+  }
   
 }

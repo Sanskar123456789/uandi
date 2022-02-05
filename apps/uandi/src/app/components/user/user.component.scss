@@ -1,0 +1,95 @@
+.user {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-top: 20px;
+    padding: 30px;
+    color: rgb(0, 0, 0);
+    .form{
+      padding: 15px;
+      form{
+        .inputs{
+            display:flex;
+            flex-wrap: wrap;
+            span{
+                margin: 12px;
+                input{
+                    width:80%;
+                }
+                // label{
+                //     margin-left: 10%;
+                // }
+                // #add{
+                //     margin-left:13%;
+                //     margin-top: 1%;
+                // }
+                textarea{
+                    width:50%;
+                }
+            }
+        }
+    }
+
+    }
+  }
+  .pd {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgb(12, 12, 12) ; 
+    font-weight:200;
+    font-size:24px;
+  }
+  
+  .de{
+    font-size: 20px;
+    .det{
+      font-weight: 500;
+      width:80%;
+      #data{
+        font-weight:200;
+        color:rgba(36, 35, 35, 0.774);
+        margin-left:5px;
+      }
+    }
+  }
+  .pd1{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgb(27, 27, 27) ; 
+    font-weight:200;
+    font-size:22px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    margin-left: -40px;
+    // margin-bottom: 15px;
+  }
+  #lis{
+    list-style-type: none;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgb(22, 22, 22) ; 
+    font-weight:100;
+    font-size:20px;
+    margin-left: -40px;
+    margin-bottom: 7px;
+  }
+
+  @keyframes p-progress-spinner-color {
+    100%,
+    0% {
+        stroke: #d62d20;
+    }
+    40% {
+        stroke: #0057e7;
+    }
+    66% {
+        stroke: #008744;
+    }
+    80%,
+    90% {
+        stroke: #ffa700;
+    }
+  }
+  
+  .spinner{
+    justify-content: center;
+    align-items:center;
+    content: center;
+    margin-left:40%;
+    margin-top:20%;
+  }

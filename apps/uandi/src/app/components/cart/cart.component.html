@@ -1,0 +1,53 @@
+<p-toast></p-toast>
+<div class="container">
+    <p-card header="CART" >
+        <div class="cond" *ngIf="!checkout">
+            <div class="services" *ngFor="let list of cart">
+                <div class="service">
+                    <div class="grid">
+                        <div class="data col-8">
+                            <img [src]="list.Service_image" alt="">
+                            <ul>
+                                <li>
+                                    <span class="name">{{list.Service_name}}</span>
+                                </li>
+                                <li>
+                                    <span class="rate">{{list.Service_rate | currency:'INR'}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-2 col-offset-1">
+                            <button pButton pRipple type="button" icon="pi pi-times" class="m-1 p-button-rounded p-button-danger p-button-outlined" (click)="remove(list._id)"></button>
+                        </div>
+                    </div>
+                </div>
+                <h3>Total {{total|currency:'INR'}}</h3>
+                <br>
+                <br>
+                <button *ngIf="total" pButton pRipple type="button" label="Checkout" class="p-button-outlined p-button-danger" (click)="checkouttoggle()"></button>
+            </div>
+        </div>
+        <div class="checkout" *ngIf="checkout">
+            <button pButton pRipple type="button" icon="pi pi-arrow-left" class="p-button-rounded p-button-outlined" (click)="checkouttoggle()"></button>
+
+            <br>
+            <h2>Please Check the Address & Contact Information</h2>
+            <form action="" [formGroup]="forms">
+                <br>
+                <div class="inputs grid">
+                    <span class="p-float-label"  >
+                        <input id="float-input3" type="text" class="ml-2" pInputText formControlName="Phone_no"> 
+                        <label for="float-input3">Phone Number</label>
+                    </span>
+                    <div class="col-12"></div>
+                    <span class="p-float-label col-12">
+                        <textarea id="float-input4" rows="5" cols="30" pInputTextarea [autoResize]="true" formControlName="Address"></textarea>
+                        <label for="float-input4" id="add">Address</label>
+                    </span>
+                </div>
+                <p-button label="Update" (click)="submit()" class="ml-2" [disabled]="false"></p-button>
+                <p-button label="Continue" (click)="submit()" class="ml-2"></p-button>
+            </form>
+        </div>
+    </p-card>
+</div>

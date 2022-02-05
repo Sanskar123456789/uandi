@@ -18,7 +18,7 @@ export class JwtinterceptorInterceptor implements HttpInterceptor {
     if(token && isAPIURL) {
       request = request.clone({
         setHeaders:{
-          Authorization:`Bearer `+token.split('"')[1],
+          Authorization:`Bearer ${token.split('"')[1]}`,
         }
       })
     }

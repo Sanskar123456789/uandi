@@ -9,7 +9,9 @@ export class User{
     Gender ?: string;
     isAdmin ?: boolean;
     User_Wishlist ?: [service];
+    Cart ?: [service];
     Orders ?: [Order];
     password ?: string;
     date?:string;
+    _id?:string;
 }

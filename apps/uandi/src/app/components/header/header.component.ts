@@ -9,28 +9,25 @@ import { SubjectService } from '@uandi/service';
 })
 export class HeaderComponent implements OnInit {
 
-  z = true;
-  bars: any;
-  constructor(private router : Router, private routes:ActivatedRoute,private subject:SubjectService) { 
-   
-  }
+  cart='0';
+  wishlist = '0';
+  constructor(private router : Router, private routes:ActivatedRoute,private subject:SubjectService) {}
 
   ngOnInit(): void {
-    this.subject.zValue.subscribe(z=>{
-      this.z = z;
-    })
-  }
-
-  toggle(){
-    if(this.z==true){
-      this.z=false;
-      this.subject.zValue.next(this.z);
-    }else{
-      this.z=true;
-      this.subject.zValue.next(this.z);
+    if(localStorage.getItem("cart")){
+      const l = localStorage.getItem("cart");
+      if(l) this.cart = l;
     }
-  }
+    if(localStorage.getItem("wishlist")){
+      const l = localStorage.getItem("wishlist");
+      if(l) this.wishlist = l;
+    }
 
-    
- 
+    this.subject.cartCount.subscribe(count=>{
+        this.cart = count.toString(); 
+    })
+    this.subject.wishlistCount.subscribe(count=>{
+        this.wishlist = count.toString();
+    })
+  } 
 }

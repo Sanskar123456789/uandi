@@ -6,6 +6,8 @@ import { Subject } from 'rxjs';
 })
 export class SubjectService {
 
-  constructor() { }
   zValue = new Subject<any>();
+  cartCount = new Subject<number>();
+  wishlistCount = new Subject<number>();
+  constructor() { }
 }

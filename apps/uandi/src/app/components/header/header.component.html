@@ -2,13 +2,21 @@
     <p-toolbar>
         <div class="p-toolbar-group-left">
             <div class="logo">
-                <p>LOGO</p>
+                <p routerLink="home">LOGO</p>
             </div>
         </div>
         <div class="p-toolbar-group-right">
-            <p-button icon="pi pi-user" class="ml-2"></p-button>
-            <p-button icon="pi pi-star" class="ml-2" styleClass="p-button-danger"></p-button>
-            <p-button icon="pi pi-shopping-cart" class="ml-2" styleClass="p-button-success"></p-button>
+            <p-button icon="pi pi-user" class="ml-2" routerLink="user"></p-button>
+
+            <div class="star-button ml-2" styleClass="p-button-danger">
+                <i class="pi pi-star mr-4 p-text-secondary"          pBadge style="font-size: 1.5rem" [value]="wishlist.toString()"  routerLink="wishlist"></i>
+            </div>
+            <div class="cart-button ml-2">
+                <i class="pi pi-shopping-cart mr-4 p-text-secondary" pBadge style="font-size: 1.5rem" [value]="cart.toString()" severity="danger"  routerLink="cart"  ></i>
+            </div>
+            
+            <!-- <p-button class="ml-2" styleClass="p-button-danger" ><i class="pi pi-star mr-4 p-text-secondary"          pBadge style="font-size: 1rem" value="2"></i></p-button>
+            <p-button class="ml-2" styleClass="p-button-success"  ><i class="pi pi-shopping-cart mr-4 p-text-secondary" pBadge style="font-size: 1rem" value="'10+'" severity="danger"></i></p-button> -->
         </div>
     </p-toolbar>
 </header>

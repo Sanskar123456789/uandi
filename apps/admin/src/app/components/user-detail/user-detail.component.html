@@ -42,8 +42,6 @@
             <h4 *ngIf="wish.length===0" class="pd"> No Wish list in this user basket</h4>
             <ul *ngIf="wish.length>0">
                 <h4 class="pd1">Wish List of user</h4>
-                <li id="lis">hello</li>
-                <li id="lis">hello</li>
                 <li *ngFor="let w of wish" id="lis"> {{w.Service_name}}</li>
             </ul>
         </div>

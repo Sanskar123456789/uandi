@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RouterModule ,Routes} from '@angular/router';
@@ -13,21 +12,52 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { ServiceTemplateComponent } from './components/service-template/service-template.component';
 import {CarouselModule} from 'primeng/carousel';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FooterComponent } from './components/footer/footer.component';
 import {InputTextModule} from 'primeng/inputtext';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoryComponent } from './components/category/category.component';
 import { LoginModule } from '@uandi/login';
 import { ApplianceComponent } from './components/appliance/appliance.component';
-import { UserAuthGuardService } from '@uandi/service';
+import { JwtinterceptorInterceptor, UserAuthGuardService } from '@uandi/service';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { UserComponent } from './components/user/user.component';
+import { CartComponent } from './components/cart/cart.component';
+import { BlogComponent } from './components/blog/blog.component';
+import { CompanyComponent } from './components/company/company.component';
+import {TableModule} from 'primeng/table';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {AvatarModule} from 'primeng/avatar';
+import {AvatarGroupModule} from 'primeng/avatargroup';
+import {DropdownModule} from 'primeng/dropdown';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {ToastModule} from 'primeng/toast';
+import {BadgeModule} from 'primeng/badge';
+import {ImageModule} from 'primeng/image';
+import { OffersComponent } from './components/offers/offers.component';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from 'angularx-social-login';
+
 const UI = [
+  ImageModule,
+  BadgeModule,
+  ToastModule,
+  InputTextareaModule,
+  DropdownModule,
+  AvatarModule,
+  AvatarGroupModule,
+  TableModule,
   InputTextModule,
   ButtonModule,
   TabMenuModule,
   CardModule,
   ToolbarModule,
-  CarouselModule
+  CarouselModule,
+  ProgressSpinnerModule
 ]
 
 const routes : Routes = [{
@@ -48,17 +78,64 @@ const routes : Routes = [{
     },
     {
       path:'wishlist',
-      component:HomepageComponent,
+      component:WishlistComponent,
       canActivate:[UserAuthGuardService]
+    },{
+      path:'cart',
+      component:CartComponent,
+      canActivate:[UserAuthGuardService]
+    },
+    {
+      path:'company',
+      component:CompanyComponent,
+    },
+    {
+      path:'blog',
+      component:BlogComponent,
+    },
+    {
+      path:'user',
+      component:UserComponent,
+      canActivate:[UserAuthGuardService]
+    },{
+      path:'offer',
+      component:OffersComponent,
     }
   ]
 }]
 
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, ShellComponent, SidebarComponent, HomepageComponent, ServiceTemplateComponent, FooterComponent, CategoryComponent, ApplianceComponent],
-  imports: [BrowserModule,RouterModule.forRoot(routes),...UI,HttpClientModule,ReactiveFormsModule,FormsModule,LoginModule],
-  providers: [],
+  declarations: [AppComponent, HeaderComponent, ShellComponent, SidebarComponent, HomepageComponent, ServiceTemplateComponent, FooterComponent, CategoryComponent, ApplianceComponent, WishlistComponent, UserComponent, CartComponent, BlogComponent, CompanyComponent, OffersComponent],
+  imports: [BrowserModule,RouterModule.forRoot(routes),...UI,HttpClientModule,ReactiveFormsModule,FormsModule,LoginModule,SocialLoginModule],
+  providers: [
+    MessageService,
+    ConfirmationService,
+    {
+      provide:HTTP_INTERCEPTORS,useClass:JwtinterceptorInterceptor,multi:true
+    },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '797105844993-tso81t951hg5gt7vs76g3omm57slhuuc.apps.googleusercontent.com'
+            )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('clientId')
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

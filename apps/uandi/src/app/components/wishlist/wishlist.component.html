@@ -1,0 +1,26 @@
+<p-toast></p-toast>
+<div class="container">
+    <p-card header="Wish List">
+        <div class="services" *ngFor="let list of wishlist">
+            <div class="service">
+                <div class="grid">
+                    <div class="data col-8">
+                        <img [src]="list.Service_image" alt="">
+                        <ul>
+                            <li>
+                                <span class="name">{{list.Service_name}}</span>
+                            </li>
+                            <li>
+                                <span class="rate">{{list.Service_rate | currency:'INR'}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-2 col-offset-1">
+                        <button pButton pRipple type="button" icon="pi pi-times" class="m-1 p-button-rounded p-button-danger p-button-outlined" (click)="remove(list._id)"></button>
+                        <button pButton pRipple type="button" icon="pi pi-shopping-cart" class="m-1 p-button-rounded p-button-success p-button-outlined" (click)="addtoCart(list._id)"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </p-card>
+</div>

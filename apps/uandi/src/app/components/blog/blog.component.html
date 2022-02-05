@@ -1,0 +1,14 @@
+<br>
+<br>
+<div class="container">
+    <div class="blog" *ngFor="let blog of data">
+        <p-card [header]="blog.Blog_title" *ngIf="blog.Blog_title">
+            <div class="data">
+                <p-image [src]="blog.Blog_image" alt="Image" width="200" *ngIf="blog.Blog_image" [preview]="true"></p-image>
+                <p>
+                    {{blog.Blog_description}}
+                </p>
+            </div>
+        </p-card>
+    </div>
+</div>

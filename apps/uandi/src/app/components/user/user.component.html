@@ -1,0 +1,97 @@
+<p-toast></p-toast>
+<div class="user p-card" *ngIf="data; else elseblock">
+    <div class="det" *ngIf="mode">
+        <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-outlined" (click)="editmode()"></button>
+        <div class="personal-details">
+            <h3 class="pd">Personal Details</h3>
+            <div class="grid de">
+                <p-avatar [label]="label" styleClass="mr-2" size="large" [style]="{'background-color':'#2196F3', 'color': '#ffffff'}" shape="circle"></p-avatar>
+                &nbsp;&nbsp;
+                <div class="col-4 det">Name  : <span id="data">{{data.Name}}</span></div>
+                <div class="col-4 det">Email : <span id="data">{{data.Email}}</span></div>
+                <div class="col-4 det">Phone : <span id="data">{{data.Phone_no}}</span></div>
+    
+                <div class="col-4 det">Gender  :<span id="data">{{data.Gender}}</span></div>
+                <div class="col-4 det">date    :<span id="data">{{data.date | date}}</span></div>
+                <div class="col-4 det">Address :<span id="data">{{data.Address}}</span></div>
+            </div>
+        </div>
+        <div class="Order-details">
+            <div>
+                <h4 *ngIf="orders.length===0; else elseblocks" class="pd"> No Order History</h4>
+            </div>
+            <ng-template #elseblocks>
+                <h3 class="pd">Order History</h3>
+                <p-table [value]="orders" responsiveLayout="scroll">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Order Status</th>
+                            <th>Services Ordered</th>
+                            <th>Total</th>
+                            
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-order>
+                        <tr>
+                            <td>{{order.Order_Status}}</td>
+                            <td>
+                                <p *ngFor="let s of order.Service">{{s.Service_name}}</p>
+                            </td>
+                            <td>{{order.total_amount}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <h2 class="pd">total purchase of services are {{total}}</h2> 
+            </ng-template>
+        </div>
+        <div class="wishlist">
+            <div class="caseWishlistempty">
+                <h4 *ngIf="wish.length===0" class="pd"> Your Wishlist is empty</h4>
+                <ul *ngIf="wish.length>0">
+                    <h4 class="pd1">Wishlist</h4>
+                    <li *ngFor="let w of wish" id="lis"> {{w.Service_name}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="form" *ngIf="!mode">
+        <button pButton pRipple type="button" icon="pi pi-arrow-left" class="p-button-rounded p-button-outlined" (click)="editmode()"></button>
+        <br>
+        <br>
+        <br>
+        <form action="" [formGroup]="forms1">
+            <div class="inputs grid">
+
+                <span class="p-float-label"  >
+                    <input id="float-input2" type="text" pInputText formControlName="Name"> 
+                    <label for="float-input2">Name</label>
+                </span>
+
+                <span class="p-float-label"  >
+                    <input id="float-input3" type="text" pInputText formControlName="Phone_no"> 
+                    <label for="float-input3">Phone Number</label>
+                </span>
+
+                <span class="p-float-label col-12">
+                    <textarea id="float-input4" rows="5" cols="30" pInputTextarea [autoResize]="true" formControlName="Address"></textarea>
+                    <label for="float-input4" id="add">Address</label>
+                </span>
+
+                <span class="p-float-label" >
+                    <!-- <input id="float-input5" type="text" pInputText formControlName="Gender"> xsxsd -->
+                    <p-dropdown [options]="genders" formControlName="Gender"  optionLabel="name"></p-dropdown>
+                    <label for="float-input5">Gender</label>
+                </span>
+
+            </div>
+            <p-button label="Submit" (click)="submit()"></p-button>
+        </form>
+        
+    </div>
+</div>
+<ng-template #elseblock>
+    <div class="spinner">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+</ng-template>

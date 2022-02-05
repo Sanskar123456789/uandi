@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="con" *ngIf="data">
     <p-card header={{data.Service_name}} subheader="{{data.Service_rate| currency:'INR'}}" [style]="{width: '360px'}" styleClass="p-card-shadow">
         <ng-template pTemplate="header">
@@ -5,8 +6,8 @@
         </ng-template>
         <p>{{data.Service_description}}</p>
         <ng-template pTemplate="footer">
-            <p-button label="Add To Cart" icon="pi pi-shopping-cart"></p-button>
-            <p-button label="Add To Wish List" icon="pi pi-star" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}" (click)="wishlist()"></p-button>
+            <p-button label="Add To Cart" icon="pi pi-shopping-cart" (click)="addtoCart(data._id)"></p-button>
+            <p-button label="Add To Wish List" icon="pi pi-star" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}" (click)="wishlist(data._id)"></p-button>
         </ng-template>
     </p-card>
 </div>
