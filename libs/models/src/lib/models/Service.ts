@@ -5,4 +5,6 @@ export class service{
     Service_image ?: string;
     Service_description ?: string;
     _id ?: string;
+    Feedback?:[string];
+    Review?:number;
 }

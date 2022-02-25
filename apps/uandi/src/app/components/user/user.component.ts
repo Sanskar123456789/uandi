@@ -1,12 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {User} from '@uandi/models';
 import {Order} from '@uandi/models';
-import {UserService} from '@uandi/service';
+import {OrderService, UserService} from '@uandi/service';
 import { Subject, timer } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { service } from '@uandi/models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
+// import { DialogService } from 'primeng/dynamicdialog';
 interface Gender {
   name: string,
   code: string
@@ -28,10 +30,14 @@ export class UserComponent implements OnInit,OnDestroy {
   label='';
   genders:Gender[] =[]
   mode = true;
+  reason='';
+  displayResponsive=false;
 
   constructor(private UserService: UserService,
               private formbuilder:FormBuilder,
-              private messageService: MessageService) { 
+              private messageService: MessageService,
+              private orderService:OrderService,
+              private router:Router) { 
     this.genders=[{
       name:"Male",
       code:"Male"
@@ -76,6 +82,7 @@ export class UserComponent implements OnInit,OnDestroy {
   }
 
   private _getUser(){
+    this.total=0;
     this.UserService.getUser(this.id).pipe(takeUntil(this.endsub$)).subscribe((data)=>{
       this.data = data;
       const l = this.data.Name
@@ -102,10 +109,16 @@ export class UserComponent implements OnInit,OnDestroy {
           this.total = this.total+0;
           return;
         }
-        this.total =  this.total+  this.orders[i].total_amount;
+        if(this.orders[i].isPaid && this.orders[i].Order_Status !='Cancel'){
+          this.total =  this.total+  this.orders[i].total_amount;
+        }
 
       }
     }
+  }
+  signOut(){
+    localStorage.clear();
+    this.router.navigate(['/home']);
   }
 
   editmode(){
@@ -146,6 +159,24 @@ export class UserComponent implements OnInit,OnDestroy {
           this.editmode();
         })      
   
+    })
+  }
+  cancelOrder(){
+    this.displayResponsive=true;
+  }
+  cancel_order(id:string){
+    if(this.reason==''){
+      alert("Please provide a reason");
+      return;
+    }
+    const data={reason:this.reason}
+    this.orderService.cancelOrder(data,id).pipe(takeUntil(this.endsub$)).subscribe(data=>{
+      if(data.success){
+        this.messageService.add({severity:'success', summary: 'Success', detail: 'Your Order has been canceled'});
+        this._getUser();
+      }else{
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'Your Order is not canceled'});
+      }
     })
   }
 }

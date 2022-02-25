@@ -6,4 +6,5 @@ export * from './lib/models/contact';
 export * from './lib/models/User';
 export * from './lib/models/Order';
 export * from './lib/models/Offer';
-export * from './lib/models/categorey'
+export * from './lib/models/categorey';
+export * from './lib/models/Banner';

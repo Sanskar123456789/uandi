@@ -34,15 +34,27 @@ import {DropdownModule} from 'primeng/dropdown';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ToastModule} from 'primeng/toast';
 import {BadgeModule} from 'primeng/badge';
+import {DialogModule} from 'primeng/dialog';
 import {ImageModule} from 'primeng/image';
 import { OffersComponent } from './components/offers/offers.component';
+import {AccordionModule} from 'primeng/accordion';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {RadioButtonModule} from 'primeng/radiobutton';
+import {RatingModule} from 'primeng/rating';
+
 import {
   GoogleLoginProvider,
   FacebookLoginProvider
 } from 'angularx-social-login';
-
+import { OrderComponent } from './components/order/order.component';
+import { ServicesComponent } from './components/services/services.component';
+import {CheckboxModule} from 'primeng/checkbox';
 const UI = [
+  RatingModule,
+  CheckboxModule,
+  RadioButtonModule,
+  DialogModule,
+  AccordionModule,
   ImageModule,
   BadgeModule,
   ToastModule,
@@ -75,6 +87,9 @@ const routes : Routes = [{
     {
       path:'appliance/:id',
       component:ApplianceComponent
+    },{
+      path:'service/:id',
+      component:ServicesComponent
     },
     {
       path:'wishlist',
@@ -100,13 +115,17 @@ const routes : Routes = [{
     },{
       path:'offer',
       component:OffersComponent,
+    },{
+      path:'Order',
+      component:OrderComponent,
+      canActivate:[UserAuthGuardService]
     }
   ]
 }]
 
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, ShellComponent, SidebarComponent, HomepageComponent, ServiceTemplateComponent, FooterComponent, CategoryComponent, ApplianceComponent, WishlistComponent, UserComponent, CartComponent, BlogComponent, CompanyComponent, OffersComponent],
+  declarations: [AppComponent, HeaderComponent, ShellComponent, SidebarComponent, HomepageComponent, ServiceTemplateComponent, FooterComponent, CategoryComponent, ApplianceComponent, WishlistComponent, UserComponent, CartComponent, BlogComponent, CompanyComponent, OffersComponent, OrderComponent, ServicesComponent],
   imports: [BrowserModule,RouterModule.forRoot(routes),...UI,HttpClientModule,ReactiveFormsModule,FormsModule,LoginModule,SocialLoginModule],
   providers: [
     MessageService,

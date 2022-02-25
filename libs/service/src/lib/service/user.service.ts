@@ -23,16 +23,21 @@ export class UserService {
     return this.http.post<any>(`${this.api}/login`,data);
   }
 
+  // Otp for Administrator
   getOTP(data:{Email:string}):Observable<any>{
     return this.http.post<any>(`${this.api}/otp`,data);
   }
-  checkOTP(data:{otp:string,actualOtp:string}):Observable<any>{
-    return this.http.post<any>(`${this.api}/otpCheck`,data)
+
+  // Otp For User
+  getOTP1(data:{User:string}):Observable<any>{
+    return this.http.post<any>(`${this.api}/getOtp`,data);
   }
 
-  getOTP1(data:{Email:string}):Observable<any>{
-    return this.http.post<any>(`${this.api}/otpcheck`,data);
+  // check otp
+  checkOTP(data:{otp:string,User:string}):Observable<any>{
+    return this.http.post<any>(`${this.api}/otpChecks`,data)
   }
+
 
   // newUser(data:User):Observable<User>{
   //   return this.http.post<User>(`${this.api}/newUser`,data)
@@ -60,5 +65,13 @@ export class UserService {
   }
   removefromCart(data:{Cart:string},id:string|null):Observable<any>{
     return this.http.put<any>(`${this.api}/removeCart/${id}`,data)
+  }
+
+  mobileOtp(data:{Phone_no:string,User:string|null}):Observable<any>{
+    return this.http.post<any>(`${this.api}/mobileOtp`,data);
+  }
+
+  checkMobileOtp(data:{User:string,otp:string}):Observable<any>{
+    return this.http.post<any>(`${this.api}/checkMobileOtp`,data);
   }
 }

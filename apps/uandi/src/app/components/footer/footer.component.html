@@ -1,11 +1,12 @@
+<p-toast></p-toast>
 <div class="footer">
     <div class="table">
         <div class="grid">
-            <ul class="col-4">
+            <ul class="col-4" *ngIf="contact[0]">
                 <li class="head">Contact</li>
-                <li class="in">Address</li>
-                <li class="in">phone.no</li>
-                <li class="in">Landing 3</li>
+                <li class="in">{{contact[0].Address}}</li>
+                <li class="in">{{contact[0].Phone_no}}</li>
+                <li class="in">{{contact[0].emailId}}</li>
                 <!-- <li class="in">Landing 4</li>
                 <li class="in">Landing 5</li>
                 <li class="in">Landing 6</li> -->
@@ -28,7 +29,7 @@
                     <h5>Subscribe and get notified of our new services</h5>
                         <div class="fle">
                             <input type="text" pInputText [(ngModel)]="emailId" id="in"> 
-                            <button pButton pRipple type="button" label="Go" class="p-button-info btn1"></button>
+                            <button pButton pRipple type="button" label="Go" class="p-button-info btn1" (click)="saveEmail()"></button>
                         </div>
                         <p id="tag" class="label">We’ll never share your email address</p>
                 </div>
@@ -40,8 +41,27 @@
         <div class="section1">
             <p>© 2022 UandI. By <span class="in">AdeshVerma</span> </p>
         </div>
-        <div class="section2">
-            <p class="in1">Icons</p>
+        <div class="section2" *ngIf="contact[0]">
+            <p class="in1" *ngIf="contact[0].instaId">
+                <a [href]="contact[0].instaId">
+                    <i  class="pi pi-instagram" style="font-size: 1rem"></i>
+                </a>
+            </p>
+            <p class="in1" *ngIf="contact[0].facebook">
+                <a [href]="contact[0].facebook">
+                    <i  class="pi pi-facebook" style="font-size: 1rem"></i>
+                </a>
+            </p>
+            <p class="in1" *ngIf="contact[0].youtube">
+                <a [href]="contact[0].youtube">
+                    <i  class="pi pi-youtube" style="font-size: 1rem"></i>
+                </a>
+            </p>
+            <p class="in1"  *ngIf="contact[0].twitter">
+                <a [href]="contact[0].twitter">
+                    <i class="pi pi-twitter" style="font-size: 1rem"></i>
+                </a>
+            </p>
         </div>
     </div>
 </div>

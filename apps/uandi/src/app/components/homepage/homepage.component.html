@@ -1,6 +1,24 @@
+<div class="top" *ngIf="cat">
+    <div class="image" *ngFor="let data of cat" >
+        <img [src]="data.Service_image" [alt]="data.CategoryOfService" srcset="" (click)="showCategory(data._id)" *ngIf="data._id">
+    </div>
+</div>
+
+<p-carousel [value]="Banner" styleClass="custom-carousel" [numVisible]="1" [numScroll]="1" [circular]="true" [autoplayInterval]="2000" *ngIf="Banner" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+    </ng-template>
+    <ng-template let-app pTemplate="item" class="padding">
+        <div class="app" (click)="showservices(app._id)">
+            <div class="image Banner">
+                <img id="Banner" src="{{app.Banner_image}}" [alt]="app.Banner_title" class="product-image" />
+            </div>
+        </div>
+    </ng-template>
+</p-carousel>
 <img src="assets/photos/banner.png" alt="banner" id="img">
 <!-- <uandi-service-template></uandi-service-template> -->
-<p-carousel [value]="app" class="screen" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1" [circular]="true" [autoplayInterval]="2000" *ngIf="app" responsiveLayout="scroll">
+
+<p-carousel [value]="app" class="screen" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1" [circular]="true" *ngIf="app" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <h5>Appliances</h5>
     </ng-template>
@@ -19,7 +37,7 @@
     </ng-template>
 </p-carousel>
 
-<p-carousel [value]="cat" class="screen" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1" [circular]="true" [autoplayInterval]="2000" *ngIf="cat" responsiveLayout="scroll">
+<p-carousel [value]="cat" class="screen" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1" [circular]="true" *ngIf="cat" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <h5>Category</h5>
     </ng-template>

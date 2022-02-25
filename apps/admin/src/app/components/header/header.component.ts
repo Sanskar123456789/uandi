@@ -37,6 +37,10 @@ export class HeaderComponent implements OnInit {
     this.z=0;
     this.router.navigate(['/service']);
   }
+  toBanner(){
+    this.z=0;
+    this.router.navigate(['/banner']);
+  }
 
   toblog(){
     this.z=0;

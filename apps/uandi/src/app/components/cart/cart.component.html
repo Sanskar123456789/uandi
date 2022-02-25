@@ -1,23 +1,25 @@
 <p-toast></p-toast>
-<div class="container">
-    <p-card header="CART" >
-        <div class="cond" *ngIf="!checkout">
-            <div class="services" *ngFor="let list of cart">
-                <div class="service">
-                    <div class="grid">
-                        <div class="data col-8">
-                            <img [src]="list.Service_image" alt="">
-                            <ul>
-                                <li>
-                                    <span class="name">{{list.Service_name}}</span>
-                                </li>
-                                <li>
-                                    <span class="rate">{{list.Service_rate | currency:'INR'}}</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-2 col-offset-1">
-                            <button pButton pRipple type="button" icon="pi pi-times" class="m-1 p-button-rounded p-button-danger p-button-outlined" (click)="remove(list._id)"></button>
+<div class="not"  *ngIf="!order">
+    <div class="container" *ngIf="!otpcheckbox">
+        <p-card header="CART" >
+            <div class="cond" *ngIf="!checkout">
+                <div class="services" *ngFor="let list of cart">
+                    <div class="service">
+                        <div class="grid">
+                            <div class="data col-8">
+                                <img [src]="list.Service_image" alt="">
+                                <ul>
+                                    <li>
+                                        <span class="name">{{list.Service_name}}</span>
+                                    </li>
+                                    <li>
+                                        <span class="rate">{{list.Service_rate | currency:'INR'}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-2 col-offset-1">
+                                <button pButton pRipple type="button" icon="pi pi-times" class="m-1 p-button-rounded p-button-danger p-button-outlined" (click)="remove(list._id)"></button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -26,28 +28,52 @@
                 <br>
                 <button *ngIf="total" pButton pRipple type="button" label="Checkout" class="p-button-outlined p-button-danger" (click)="checkouttoggle()"></button>
             </div>
-        </div>
-        <div class="checkout" *ngIf="checkout">
-            <button pButton pRipple type="button" icon="pi pi-arrow-left" class="p-button-rounded p-button-outlined" (click)="checkouttoggle()"></button>
-
-            <br>
-            <h2>Please Check the Address & Contact Information</h2>
-            <form action="" [formGroup]="forms">
+            <div class="checkout" *ngIf="checkout">
+                <button pButton pRipple type="button" icon="pi pi-arrow-left" class="p-button-rounded p-button-outlined" (click)="checkouttoggle()"></button>
+    
                 <br>
-                <div class="inputs grid">
-                    <span class="p-float-label"  >
-                        <input id="float-input3" type="text" class="ml-2" pInputText formControlName="Phone_no"> 
-                        <label for="float-input3">Phone Number</label>
+                <h2>Please Check the Address & Contact Information</h2>
+                <form action="" [formGroup]="forms">
+                    <br>
+                    <div class="inputs grid">
+                        <span class="p-float-label"  >
+                            <input id="float-input3" type="text" class="ml-2" pInputText formControlName="Phone_no" minlength="10" maxlength="10"> 
+                            <label for="float-input3">Phone Number</label>
+                        </span>
+                        <div class="col-12"></div>
+                        <div class="col-12"></div>
+                        <div class="col-12"></div>
+                        <span class="p-float-label col-12">
+                            <textarea id="float-input4" rows="5" cols="30" pInputTextarea [autoResize]="true" formControlName="Address"></textarea>
+                            <label for="float-input4" id="add">Address</label>
+                        </span>
+                    </div>
+                    <p-button label="Update" (click)="update()" class="ml-2"></p-button>
+                    <p-button *ngIf="!continuestate" label="Continue"  class="ml-2"  [disabled]="true"></p-button>
+                    <p-button *ngIf="continuestate" label="Continue" (click)="continue()" class="ml-2"  [disabled]="false"></p-button>
+                </form>
+            </div>
+        </p-card>
+    </div>
+    <div class="otp" *ngIf="otpcheckbox">
+        <br>
+        <br>
+        <div class='input-fields'>
+            <p-card>
+                <h1>OTP Has been sent to your Mobile number no please verify your Mobile number</h1>
+                <form action="" [formGroup]="forms2">
+                    <span class="p-float-label">
+                        <input id="float-input2" type="text" pInputText formControlName="Otp"> 
+                        <label for="float-input2">OTP</label>
                     </span>
-                    <div class="col-12"></div>
-                    <span class="p-float-label col-12">
-                        <textarea id="float-input4" rows="5" cols="30" pInputTextarea [autoResize]="true" formControlName="Address"></textarea>
-                        <label for="float-input4" id="add">Address</label>
-                    </span>
-                </div>
-                <p-button label="Update" (click)="submit()" class="ml-2" [disabled]="false"></p-button>
-                <p-button label="Continue" (click)="submit()" class="ml-2"></p-button>
-            </form>
+                    <br>
+                    <br>
+                    <p-button label="Submit" (click)="submitOtp()"></p-button>
+                </form>
+            </p-card>    
         </div>
-    </p-card>
+    </div>
+</div>
+<div class="order" *ngIf="order">
+    <uandi-order [Services]="cart" [total]="total"></uandi-order>
 </div>

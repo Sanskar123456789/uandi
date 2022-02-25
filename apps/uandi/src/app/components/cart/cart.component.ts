@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import {User,service} from '@uandi/models'
 import { MessageService } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'uandi-cart',
   templateUrl: './cart.component.html',
@@ -12,24 +13,35 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CartComponent implements OnInit,OnDestroy {
 
-  checkout = false;
   endsub$:Subject<any> = new Subject();
   cart:service[]|undefined = [];
   data:User={};
   id="";
   total= 0;
   forms!: FormGroup;
-  constructor(private userService: UserService,private messageService: MessageService,private subject:SubjectService,private formbuilder:FormBuilder) { }
+  forms2!: FormGroup;
+  otpcheckbox = false;
+  order = false;
+  checkout = false;
+  continuestate = false;
+  constructor(private userService: UserService,private messageService: MessageService,private subject:SubjectService,private formbuilder:FormBuilder,private router:Router) { }
 
   ngOnInit(): void {
-    this._getUsers();
     this._formInit();
+    this._formInit2();
+    this._getUsers();
   }
 
   private _formInit(){
     this.forms = this.formbuilder.group({
       Phone_no : ['',Validators.required],
       Address : ['', Validators.required],
+    })
+  }
+
+  private _formInit2(){
+    this.forms2 = this.formbuilder.group({
+      Otp : ['',Validators.required],
     })
   }
 
@@ -45,11 +57,18 @@ export class CartComponent implements OnInit,OnDestroy {
       this.id= token;
       this.userService.getUser(token).pipe(takeUntil(this.endsub$)).subscribe((data) => {
         this.data = data;
+        if(data.Loyality_points)
+        localStorage.setItem('UserCoin',data.Loyality_points?.toString())
         if(data.Cart)
         this.cart= data.Cart
         this.total_amount();
         this.forms.controls.Phone_no.setValue(data.Phone_no);
         this.forms.controls.Address.setValue(data.Address);
+        if(this.forms.controls.Address.value=="" || this.forms.controls.Phone_no.value==null || this.forms.controls.Phone_no.value.toString().length <10){
+          this.continuestate=false;
+        }else{
+          this.continuestate=true;
+        }
       })
     }
   }
@@ -67,6 +86,8 @@ export class CartComponent implements OnInit,OnDestroy {
         this.cart = data.data.Cart;
         this.subject.cartCount.next(data.data.Cart.length);
         localStorage.setItem('cart',data.data.Cart.length);
+        this.total = 0;
+        this.total_amount();
       })
     }
   }
@@ -87,7 +108,75 @@ export class CartComponent implements OnInit,OnDestroy {
     this.checkout = !this.checkout
   }
 
-  submit(){
-    console.log(this.forms.controls);
+  update(){
+    if(this.forms.invalid)return
+    if(this.forms.controls.Phone_no.value.length ==10){
+      this.continuestate=true;
+    }else{
+      alert("Please enter your phone number without country code and it should be of 10 digit");
+    }
+    if(this.forms.controls.Address.value==""){
+      if(this.continuestate)
+      this.continuestate=false;
+    }else{
+      if(this.continuestate)
+      this.continuestate=true;
+      const user:User = {
+        Phone_no:this.forms.controls.Phone_no.value,
+        Address:this.forms.controls.Address.value
+      }
+      let id = localStorage.getItem('id');
+      if(id) {
+        id = id.split('"')[1]
+        this.userService.updateUser(user,id).pipe(takeUntil(this.endsub$)).subscribe(()=>{
+          this.messageService.add({severity:'success', summary: 'Success', detail: 'data is updated now continue to watch summary'});
+        })
+      }
+    }
+  }
+  
+  continue(){
+    if(this.forms.invalid) return
+    else{
+    const pn = `91${this.forms.controls.Phone_no.value}`
+    this.otpcheckbox = true;
+    
+    let id = localStorage.getItem('id');
+    if(id){id = id?.split('"')[1];
+      const data = {
+        Phone_no:pn,
+        User:id
+      }
+      this.userService.mobileOtp(data).pipe(takeUntil(this.endsub$)).subscribe((data)=>{
+        if(data.success){
+          alert(data.msg);
+          this.otpcheckbox = true;
+        }else{
+          alert(data.msg);
+        }
+      })
+    }
+  }
+  }
+
+  submitOtp(){
+    if(this.forms2.invalid)return;
+    else{
+    let id = localStorage.getItem('id');
+    if(id){id = id?.split('"')[1];
+      const data = {
+        otp:this.forms2.controls.Otp.value,
+        User:id
+      }
+      this.userService.checkMobileOtp(data).pipe(takeUntil(this.endsub$)).subscribe((data)=>{
+        if(data.success){
+          this.order = !this.order;          
+        }else{
+          this.otpcheckbox = !this.otpcheckbox;
+          alert('OTP IS WRONG');
+        }
+      })
+    }
+    }
   }
 }

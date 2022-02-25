@@ -29,6 +29,25 @@
 .mobile{
     display: none;
 }
+.top{
+    display: flex;
+    width:100%;
+    background-color:white;
+    .image{
+        padding:12px;
+        img{
+            height:10vh;
+            width:auto;
+            border-radius: 50%;
+            padding:3px;
+            border: 1px solid rgba(58, 57, 57, 0.507);
+        }
+
+        img:hover{
+            cursor: pointer;
+        }
+    }
+}
 
 @media screen and (max-width: 750px){
     .mobile{
@@ -86,4 +105,10 @@
         right: 10px;
         font-size: 22px;
     }
+}
+
+#Banner{
+    width: 100%;
+    height: 100px;
+    border-radius: 12px;
 }

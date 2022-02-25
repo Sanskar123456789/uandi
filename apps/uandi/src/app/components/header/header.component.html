@@ -6,17 +6,15 @@
             </div>
         </div>
         <div class="p-toolbar-group-right">
-            <p-button icon="pi pi-user" class="ml-2" routerLink="user"></p-button>
+            <p-button icon="pi pi-user" class="mr-2" routerLink="user"></p-button>
 
-            <div class="star-button ml-2" styleClass="p-button-danger">
-                <i class="pi pi-star mr-4 p-text-secondary"          pBadge style="font-size: 1.5rem" [value]="wishlist.toString()"  routerLink="wishlist"></i>
+            <div class="star-button ml-2 cur" styleClass="p-button-danger">
+                <i class="pi pi-star mr-4 p-text-secondary"          pBadge style="font-size: 1.2rem" [value]="wishlist.toString()"  routerLink="wishlist"></i>
             </div>
-            <div class="cart-button ml-2">
-                <i class="pi pi-shopping-cart mr-4 p-text-secondary" pBadge style="font-size: 1.5rem" [value]="cart.toString()" severity="danger"  routerLink="cart"  ></i>
+            <div class="cart-button ml-2 cur">
+                <i class="pi pi-shopping-cart mr-4 p-text-secondary" pBadge style="font-size: 1.2rem" [value]="cart.toString()" severity="danger"  routerLink="cart"  ></i>
             </div>
             
-            <!-- <p-button class="ml-2" styleClass="p-button-danger" ><i class="pi pi-star mr-4 p-text-secondary"          pBadge style="font-size: 1rem" value="2"></i></p-button>
-            <p-button class="ml-2" styleClass="p-button-success"  ><i class="pi pi-shopping-cart mr-4 p-text-secondary" pBadge style="font-size: 1rem" value="'10+'" severity="danger"></i></p-button> -->
         </div>
     </p-toolbar>
 </header>

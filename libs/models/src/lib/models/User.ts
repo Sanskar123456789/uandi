@@ -14,4 +14,5 @@ export class User{
     password ?: string;
     date?:string;
     _id?:string;
+    Loyality_points?:number;
 }

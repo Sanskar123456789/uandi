@@ -5,15 +5,19 @@
         <button pButton pRipple type="button" label="All Orders" class="p-button-primary ml-1" icon="pi pi-search" (click)="Change_mode_0()"></button>
         <button pButton pRipple type="button" label="Completed Orders" class="p-button-success ml-1" icon="pi pi-thumbs-up" (click)="Change_mode_1()"></button>
         <button pButton pRipple type="button" label="InCompleted Orders" class="p-button-danger ml-1" icon="pi pi-thumbs-down" (click)="Change_mode_2()"></button>
+        <button pButton pRipple type="button" label="Paid Orders" class="p-button-success ml-1" icon="pi pi-thumbs-up" (click)="Change_mode_4()"></button>
+        <button pButton pRipple type="button" label="Not Paid Orders" class="p-button-danger ml-1" icon="pi pi-thumbs-down" (click)="Change_mode_3()"></button>
         <br><br>
     </div>
 <br><br>
+
+
 <div  *ngIf="data; else elseblock">
     <div class="mode0" *ngIf="mode===0">
-        <p-table [value]="data" responsiveLayout="scroll">
+        <p-table [value]="data" responsiveLayout="scroll"  sortMode="multiple">
             <ng-template pTemplate="caption">
                 <div class="p-d-flex p-ai-center p-jc-between">
-                    Services
+                    Orders
                 </div>
             </ng-template>
             <ng-template pTemplate="header">
@@ -21,6 +25,7 @@
                     <th>Order Status</th>
                     <th>Is completed</th>
                     <th>total_amount</th>
+                    <th>Payment Status</th>
                     <th>date</th>
                     <th></th>
                 </tr>
@@ -35,9 +40,16 @@
                         <p-tag styleClass="p-mr-2" icon="pi pi-times" severity="danger"></p-tag>
                     </td>
     
-                    <td>{{Order.total_amount}}</td>
+                    <td>{{Order.total_amount/100 | currency:'INR'}}</td>
+
+                    <td *ngIf="Order.isPaid">
+                        <p-tag styleClass="p-mr-2" icon="pi pi-check" severity="success"></p-tag>
+                    </td>
+                    <td *ngIf="!Order.isPaid">
+                        <p-tag styleClass="p-mr-2" icon="pi pi-times" severity="danger"></p-tag>
+                    </td>
     
-                    <td>{{Order.date | date}}</td>
+                    <td>{{Order.date | date:'short'}}</td>
     
                     <td>
                         <p-button label="See details" icon="pi pi-search" (click)="toseeDetails(Order._id)"></p-button>
@@ -47,7 +59,7 @@
             </ng-template>
             <ng-template pTemplate="summary">
                 <div class="p-d-flex p-ai-center p-jc-between">
-                    In total there are {{data ? data.length : 0 }} Appliance(s).
+                    In total there are {{data ? data.length : 0 }} Order(s).
                 </div>
             </ng-template>
         </p-table>
@@ -57,7 +69,7 @@
         <p-table [value]="data" responsiveLayout="scroll">
             <ng-template pTemplate="caption">
                 <div class="p-d-flex p-ai-center p-jc-between">
-                    Services
+                    Orders
                 </div>
             </ng-template>
             <ng-template pTemplate="header">
@@ -65,6 +77,7 @@
                     <th>Order Status</th>
                     <th>Is completed</th>
                     <th>total_amount</th>
+                    <th>Payment Status</th>
                     <th>date</th>
                     <th></th>
                 </tr>
@@ -72,14 +85,21 @@
             <ng-template pTemplate="body" let-Order>
                 <tr *ngIf="Order.Iscompleted">
                     <td>{{Order.Order_Status}}</td>
-                    <td *ngIf="Order.Iscompleted">
+                    <td *ngIf="Order.isCompleted">
                         <p-tag styleClass="p-mr-2" icon="pi pi-check" severity="success"></p-tag>
                     </td>
-                    <td *ngIf="!Order.Iscompleted">
+                    <td *ngIf="!Order.isCompleted">
                         <p-tag styleClass="p-mr-2" icon="pi pi-times" severity="danger"></p-tag>
                     </td>
     
-                    <td>{{Order.total_amount}}</td>
+                    <td>{{Order.total_amount/100 | currency:'INR'}}</td>
+                    
+                    <td *ngIf="Order.isPaid">
+                        <p-tag styleClass="p-mr-2" icon="pi pi-check" severity="success"></p-tag>
+                    </td>
+                    <td *ngIf="!Order.isPaid">
+                        <p-tag styleClass="p-mr-2" icon="pi pi-times" severity="danger"></p-tag>
+                    </td>
     
                     <td>{{Order.date | date}}</td>
     
@@ -91,17 +111,17 @@
             </ng-template>
             <ng-template pTemplate="summary">
                 <div class="p-d-flex p-ai-center p-jc-between">
-                    In total there are {{data ? data.length : 0 }} Appliance(s).
+                    In total there are {{data ? data.length : 0 }} Orders(s).
                 </div>
             </ng-template>
         </p-table>
     </div>
-    
+
     <div class="mode2" *ngIf="mode===2">
         <p-table [value]="data" responsiveLayout="scroll">
             <ng-template pTemplate="caption">
                 <div class="p-d-flex p-ai-center p-jc-between">
-                    Services
+                    Orders
                 </div>
             </ng-template>
             <ng-template pTemplate="header">
@@ -109,6 +129,7 @@
                     <th>Order Status</th>
                     <th>Is completed</th>
                     <th>total_amount</th>
+                    <th>Payment Status</th>
                     <th>date</th>
                     <th></th>
                 </tr>
@@ -123,7 +144,14 @@
                         <p-tag styleClass="p-mr-2" icon="pi pi-times" severity="danger"></p-tag>
                     </td>
     
-                    <td>{{Order.total_amount}}</td>
+                    <td>{{Order.total_amount/100 | currency:'INR'}}</td>
+    
+                    <td *ngIf="Order.isPaid">
+                        <p-tag styleClass="p-mr-2" icon="pi pi-check" severity="success"></p-tag>
+                    </td>
+                    <td *ngIf="!Order.isPaid">
+                        <p-tag styleClass="p-mr-2" icon="pi pi-times" severity="danger"></p-tag>
+                    </td>
     
                     <td>{{Order.date | date}}</td>
     
@@ -135,7 +163,110 @@
             </ng-template>
             <ng-template pTemplate="summary">
                 <div class="p-d-flex p-ai-center p-jc-between">
-                    In total there are {{data ? data.length : 0 }} Appliance(s).
+                    In total there are {{data ? data.length : 0 }} Orders(s).
+                </div>
+            </ng-template>
+        </p-table>
+    </div>
+
+    <div class="mode3" *ngIf="mode===3">
+        <p-table [value]="data" responsiveLayout="scroll">
+            <ng-template pTemplate="caption">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    Orders
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Order Status</th>
+                    <th>Is completed</th>
+                    <th>total_amount</th>
+                    <th>Payment Status</th>
+                    <th>date</th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-Order>
+                <tr *ngIf="!Order.isPaid">
+                    <td>{{Order.Order_Status}}</td>
+                    <td *ngIf="Order.Iscompleted">
+                        <p-tag styleClass="p-mr-2" icon="pi pi-check" severity="success"></p-tag>
+                    </td>
+                    <td *ngIf="!Order.Iscompleted">
+                        <p-tag styleClass="p-mr-2" icon="pi pi-times" severity="danger"></p-tag>
+                    </td>
+    
+                    <td>{{Order.total_amount/100 | currency:'INR'}}</td>
+    
+                    <td *ngIf="Order.isPaid">
+                        <p-tag styleClass="p-mr-2" icon="pi pi-check" severity="success"></p-tag>
+                    </td>
+                    <td *ngIf="!Order.isPaid">
+                        <p-tag styleClass="p-mr-2" icon="pi pi-times" severity="danger"></p-tag>
+                    </td>
+    
+                    <td>{{Order.date | date}}</td>
+    
+                    <td>
+                        <p-button label="See details" icon="pi pi-search" (click)="toseeDetails(Order._id)"></p-button>
+                    </td>
+                    
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    In total there are {{data ? data.length : 0 }} Orders(s).
+                </div>
+            </ng-template>
+        </p-table>
+    </div>
+    <div class="mode4" *ngIf="mode===4">
+        <p-table [value]="data" responsiveLayout="scroll">
+            <ng-template pTemplate="caption">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    Orders
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Order Status</th>
+                    <th>Is completed</th>
+                    <th>total_amount</th>
+                    <th>Payment Status</th>
+                    <th>date</th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-Order>
+                <tr *ngIf="Order.isPaid">
+                    <td>{{Order.Order_Status}}</td>
+                    <td *ngIf="Order.Iscompleted">
+                        <p-tag styleClass="p-mr-2" icon="pi pi-check" severity="success"></p-tag>
+                    </td>
+                    <td *ngIf="!Order.Iscompleted">
+                        <p-tag styleClass="p-mr-2" icon="pi pi-times" severity="danger"></p-tag>
+                    </td>
+    
+                    <td>{{Order.total_amount/100 | currency:'INR'}}</td>
+    
+                    <td *ngIf="Order.isPaid">
+                        <p-tag styleClass="p-mr-2" icon="pi pi-check" severity="success"></p-tag>
+                    </td>
+                    <td *ngIf="!Order.isPaid">
+                        <p-tag styleClass="p-mr-2" icon="pi pi-times" severity="danger"></p-tag>
+                    </td>
+    
+                    <td>{{Order.date | date}}</td>
+    
+                    <td>
+                        <p-button label="See details" icon="pi pi-search" (click)="toseeDetails(Order._id)"></p-button>
+                    </td>
+                    
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    In total there are {{data ? data.length : 0 }} Orders(s).
                 </div>
             </ng-template>
         </p-table>

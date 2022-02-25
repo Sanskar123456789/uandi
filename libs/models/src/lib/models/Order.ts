@@ -6,10 +6,12 @@ import { service } from '@uandi/models';
 export class Order{
     Order_Status?:string;
     User?:User;
-    Service?:[service];
+    Service?:service[];
     Offer?:string;
     Iscompleted?:boolean;
     total_amount =0;
     date?: Date;
+    isPaid?: boolean;
     _id ?: string;
+    RazorpayOrder_id?: string;
 }

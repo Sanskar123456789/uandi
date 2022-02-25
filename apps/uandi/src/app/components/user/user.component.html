@@ -2,6 +2,7 @@
 <div class="user p-card" *ngIf="data; else elseblock">
     <div class="det" *ngIf="mode">
         <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-outlined" (click)="editmode()"></button>
+        <button pButton pRipple type="button" icon="pi pi-sign-out" class="p-button-rounded p-button-outlined ml-2" (click)="signOut()"></button>
         <div class="personal-details">
             <h3 class="pd">Personal Details</h3>
             <div class="grid de">
@@ -14,6 +15,9 @@
                 <div class="col-4 det">Gender  :<span id="data">{{data.Gender}}</span></div>
                 <div class="col-4 det">date    :<span id="data">{{data.date | date}}</span></div>
                 <div class="col-4 det">Address :<span id="data">{{data.Address}}</span></div>
+                <div class="col-4 det">Uandi Coins :<span id="data">{{data.Loyality_points}}
+                    <img src="assets/photos/coin.png" alt="" srcset="">
+                </span></div>
             </div>
         </div>
         <div class="Order-details">
@@ -28,7 +32,9 @@
                             <th>Order Status</th>
                             <th>Services Ordered</th>
                             <th>Total</th>
-                            
+                            <th>Payment Status</th>
+                            <th>Mode Of Payment</th>
+                            <th></th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-order>
@@ -37,11 +43,47 @@
                             <td>
                                 <p *ngFor="let s of order.Service">{{s.Service_name}}</p>
                             </td>
-                            <td>{{order.total_amount}}</td>
+                            <td>{{order.total_amount/100 | currency:'INR'}}</td>
+                            <td>{{order.isPaid}}</td>
+                            <td *ngIf="order.RazorpayOrder_id">Online</td>
+                            <td *ngIf="!order.RazorpayOrder_id">Offline</td>
+                            <td *ngIf="order.isPaid && order.Order_Status==='Completed' || order.Order_Status==='Cancel';else elseblock1">
+                                <button pButton pRipple type="button" label="Cancel" class="p-button-danger" disabled="true"></button>
+                            </td>
+                            <ng-template #elseblock1>
+                                <td>
+                                    <button pButton pRipple type="button" label="Cancel" class="p-button-danger" (click)="cancelOrder()"></button>
+                                </td>
+                                <p-dialog header="Cancel Order" [(visible)]="displayResponsive" [breakpoints]="{'960px': '75vw'}" [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+                                    <h3>Please provide the reason</h3>
+
+                                    <div class="field-radiobutton">
+                                        <p-radioButton name="city" value="Changed the mind" [(ngModel)]="reason" inputId="city1"></p-radioButton>
+                                        <label for="city1">Changed the mind</label>
+                                    </div>
+                                    <div class="field-radiobutton">
+                                        <p-radioButton name="city" value="didn't like the service" [(ngModel)]="reason" inputId="city2"></p-radioButton>
+                                        <label for="city2">didn't like the service</label>
+                                    </div>
+                                    <div class="field-radiobutton">
+                                        <p-radioButton name="city" value="Taking to much time" [(ngModel)]="reason" inputId="city3"></p-radioButton>
+                                        <label for="city3">Taking to much time</label>
+                                    </div>
+                                    <div class="field-radiobutton">
+                                        <p-radioButton name="city" value="others" [(ngModel)]="reason" inputId="city4"></p-radioButton>
+                                        <label for="city4">others</label>
+                                    </div>
+                                    
+                                    <ng-template pTemplate="footer">
+                                        <p-button (click)="displayResponsive=false" label="No" styleClass="p-button-text"></p-button>
+                                        <p-button (click)="displayResponsive=false" label="Yes" styleClass="p-button-text" (click)="cancel_order(order._id)"></p-button>
+                                    </ng-template>
+                                </p-dialog>
+                            </ng-template>
                         </tr>
                     </ng-template>
                 </p-table>
-                <h2 class="pd">total purchase of services are {{total}}</h2> 
+                <h2 class="pd">total purchase of services are {{total/100| currency:'INR'}}</h2> 
             </ng-template>
         </div>
         <div class="wishlist">
@@ -49,7 +91,22 @@
                 <h4 *ngIf="wish.length===0" class="pd"> Your Wishlist is empty</h4>
                 <ul *ngIf="wish.length>0">
                     <h4 class="pd1">Wishlist</h4>
-                    <li *ngFor="let w of wish" id="lis"> {{w.Service_name}}</li>
+                    <p-table [value]="wish" responsiveLayout="scroll">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Name</th>
+                                <th>Rate</th>
+                                <th>Description</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-order>
+                            <tr>
+                                <td>{{order.Service_name}}</td>
+                                <td>{{order.Service_rate}}</td>
+                                <td>{{order.Service_description}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
                 </ul>
             </div>
         </div>

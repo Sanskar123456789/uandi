@@ -43,6 +43,12 @@ export class OrderComponent implements OnInit,OnDestroy {
   Change_mode_2() {
     this.mode = 2;
   }
+  Change_mode_3() {
+    this.mode = 3;
+  }
+  Change_mode_4() {
+    this.mode = 4;
+  }
   
   toseeDetails(id:string){
     this.router.navigate([`/NewOrder/${id}`]);

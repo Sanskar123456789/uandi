@@ -5,11 +5,19 @@
         <div class="grid de">
             <div class="col-4 det">date    :<span id="data">{{Orderdet.date | date}}</span></div>
 
-            <div class="col-4 det">Order Status  : <span id="data"><p-dropdown [options]="cities" [(ngModel)]="selectedCityCode" optionLabel="name" optionValue="code" (onChange)="getOS()"></p-dropdown></span></div>
+            <div class="col-4 det">Order Status  : <span id="data"><p-dropdown [options]="status" [(ngModel)]="Order_Status" optionLabel="name" optionValue="code" (onChange)="getOS()"></p-dropdown></span></div>
 
             <div class="col-4 det">Completed :<span id="data"><p-inputSwitch [(ngModel)]="isCompleted" (onChange)="getOS()"></p-inputSwitch></span></div>
 
-            <div class="col-4 det">Total Amount :<span id="data">{{Orderdet.total_amount}}</span></div>
+            
+            <div class="col-4 det">Total Amount :<span id="data">{{Orderdet.total_amount/100| currency:'INR'}}</span></div>
+            
+            <div *ngIf="Orderdet.RazorpayOrder_id" class="col-4 det">Mode Of Payment :<span id="data">Online</span></div>
+            <div *ngIf="!Orderdet.RazorpayOrder_id" class="col-4 det">Mode Of Payment :<span id="data">Offline</span></div>
+            
+            <div class="col-4 det">Is paid :<span id="data"><p-inputSwitch [(ngModel)]="isPaid" (onChange)="ChangeOrderPaymentStatus()"></p-inputSwitch></span></div>
+
+            <div class="col-4 det">Total Amount :<span id="data">{{Orderdet.total_amount/100 | currency:"INR"}}</span></div>
             
         </div>
     </div>
@@ -31,7 +39,7 @@
 
     </div>
     
-    <h4> Services Ordered</h4>
+    <h2> Services Ordered</h2>
     <div class="Order-details">
         <h3 class="pd">Order History</h3>
         <div>

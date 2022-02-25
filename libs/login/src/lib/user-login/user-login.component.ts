@@ -156,10 +156,12 @@ export class UserLoginComponent implements  OnInit,OnDestroy {
     Phone_no : this.forms1.controls.Phone_no.value,
     Address : this.forms1.controls.Address.value,
     Gender :gen,
-  }
+    }
+
+    console.log(data);
     
     this.UserData = data;
-    this.userService.getOTP1({Email:data.Email}).pipe(takeUntil(this.endsub$)).subscribe(data => {
+    this.userService.getOTP1({User:this.forms1.controls.Email.value}).pipe(takeUntil(this.endsub$)).subscribe(data => {
       if(data.success){
         this.stage = 3;
         this.otp = data.otp;
@@ -171,7 +173,7 @@ export class UserLoginComponent implements  OnInit,OnDestroy {
     const data=
     {
       otp:this.forms2.controls.otp.value,
-      actualOtp:this.otp
+      User: this.forms1.controls.Email.value,
     }    
     this.userService.checkOTP(data).subscribe(res=>{
       if(res.success){
@@ -190,6 +192,7 @@ export class UserLoginComponent implements  OnInit,OnDestroy {
       }
       else{
         this.c++;
+        alert(`Wrong OTP you have left with ${3-this.c}`);
         if(this.c==3){
           this.stage=1;
         }
@@ -210,6 +213,7 @@ export class UserLoginComponent implements  OnInit,OnDestroy {
         localStorage.setItem('id',JSON.stringify(token.UserData._id));
         localStorage.setItem('cart',JSON.stringify(token.UserData.Cart.length));
         localStorage.setItem('wishlist',JSON.stringify(token.UserData.User_Wishlist.length));
+        localStorage.setItem('UserCoin',JSON.stringify(token.UserData.Loyality_points));
         this.stage = 2;
         this.router.navigate(['/home'])
       }else{
@@ -219,10 +223,11 @@ export class UserLoginComponent implements  OnInit,OnDestroy {
   }
 
   forgotpassword(){
-    this.userService.getOTP1({Email:this.forms.controls.emailId.value}).pipe(takeUntil(this.endsub$)).subscribe(data => {
+    this.userService.getOTP1({User:this.forms.controls.emailId.value}).pipe(takeUntil(this.endsub$)).subscribe(data => {
       if(data.success){
         this.stage = 4;
-        this.otp = data.otp;
+      }else{
+        alert("You are not Registered pls register");;
       }
     })
   }
@@ -236,6 +241,9 @@ export class UserLoginComponent implements  OnInit,OnDestroy {
       this.userService.updatePassword(data).pipe(takeUntil(this.endsub$)).subscribe(data=>{
         if(data.success){
           this.stage = 2
+        }else{
+          alert(data.msg);
+          this.stage1();
         }
       })
     }

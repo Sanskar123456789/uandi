@@ -15,6 +15,7 @@ export class ServiceTemplateComponent implements OnInit,OnDestroy {
   @Input() service:string | undefined;
   data:service={};
   endsub$:Subject<any> = new Subject();
+  displayPosition= false;
   constructor(private services:ServiceService,private router: Router,private userService:UserService,private messageService:MessageService,private subject:SubjectService) { }
 
   ngOnDestroy(){
@@ -70,5 +71,9 @@ export class ServiceTemplateComponent implements OnInit,OnDestroy {
         localStorage.setItem('cart',data.data.Cart.length);
       })
     }
+  }
+
+  showfeedback(){
+    this.displayPosition = true;
   }
 }

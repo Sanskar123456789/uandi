@@ -54,13 +54,14 @@ export class LoginPageComponent implements OnInit {
     const data=
     {
       otp:this.forms.controls.otp.value,
-      actualOtp:this.otp
+      User: this.forms.controls.emailId.value,
     }
     this.userService.checkOTP(data).subscribe(res=>{
       if(res.success){
         this.stage=4;
       }else{
         this.c++;
+        alert(`Wrong OTP you have left with ${3-this.c} chances`);
         if(this.c==3){
           this.stage=1;
         }

@@ -1,0 +1,55 @@
+<br>
+<br>
+<p-card header="Order Summary" [subheader]="'Your total amount is '+total.toString()" *ngIf="Services">
+    <p-table [value]="Services" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>Description</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>{{product.Service_name}}</td>
+                <td>{{product.Service_rate}}</td>
+                <td><img [src]="product.Service_image" alt="" style="width: 30%"></td>
+                <td>{{product.Service_description}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <h4>
+        <div class="field-checkbox">
+            <p-checkbox [(ngModel)]="checked" [binary]="true" inputId="binary" (click)="gettotalamt()"></p-checkbox>
+            <label for="binary">Use Uandi Coins</label>
+        </div>        
+    </h4>
+    <span>You have {{coins}} <img src="assets/photos/coin.png" alt="coins" > Coins</span>
+    
+    <br>
+    <br>
+    <button pButton pRipple type="button" icon="pi pi-plus" [label]="coupan" class="p-button-outlined p-button-warning" (click)="showResponsiveDialog()"></button>
+    <p-dialog header="Offers" [(visible)]="displayResponsive" [breakpoints]="{'960px': '75vw'}" [style]="{width: '50vw'}"
+    [draggable]="false" [resizable]="false">
+    <uandi-offers (SelectedOfferCode)="setOfferCode($event)" (SelectedOfferPercentage)="setOfferPer($event)" (SelectedOfferminamount)="setOfferMin($event)"></uandi-offers>
+        <ng-template pTemplate="footer">
+        <p-button (click)="displayResponsive=false" label="Yes" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-dialog>
+    <br>
+    <br>
+    <div class="payment">
+        <p-accordion>
+            <p-accordionTab header="Net Banking">
+               <h4>Place Order to continue with net banking</h4>
+               <p-button label="Place Order" id="rzp-button1" (click)="generateOnlineOrder()"></p-button>
+            </p-accordionTab>
+            <p-accordionTab header="Pay after delivery">
+                <h4>Place Order to continue with this method</h4>
+               <p-button label="Place Order" (click)="generateOrder()"></p-button>
+            </p-accordionTab>
+        </p-accordion>
+    </div>
+    
+</p-card>

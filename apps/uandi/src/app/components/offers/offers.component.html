@@ -2,9 +2,11 @@
 <br>
 <div class="container">
     <div class="offer" *ngFor="let offer of data">
-        <p-card [header]="offer.Offer_title" *ngIf="offer.Offer_title && offer.Offer_Description" [subheader]="offer.Offer_Description">
-            {{offer.Offer_percentage}}% on more than total Bill of {{offer.Offer_onBasisOfTotalAmount}} by using Code {{offer.Offer_code}}
-        </p-card>
+        <div class="card" (click)="style(offer)">
+            <p-card [header]="offer.Offer_title" *ngIf="offer.Offer_title && offer.Offer_Description" [subheader]="offer.Offer_Description">
+                {{offer.Offer_percentage}}% on more than total Bill of {{offer.Offer_onBasisOfTotalAmount}} by using Code {{offer.Offer_code}}
+            </p-card>
+        </div>
         <br>
     </div>
 </div>

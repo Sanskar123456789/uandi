@@ -45,7 +45,9 @@ import {DropdownModule} from 'primeng/dropdown';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import { LoginModule } from '@uandi/login';
 import { ShellComponentComponent } from './components/shell-component/shell-component.component';
-import {AuthGuardService, JwtinterceptorInterceptor} from '@uandi/service'
+import {AuthGuardService, JwtinterceptorInterceptor} from '@uandi/service';
+import { BannerComponent } from './components/banner/banner.component';
+import { BannerNewComponent } from './components/banner-new/banner-new.component'
 
 const UI = [
   DropdownModule,
@@ -88,6 +90,17 @@ const routes : Routes =
   {
     path:'editCategory/:id',
     component:CategoryNewComponent
+  },{
+    path:'banner',
+    component:BannerComponent
+  },
+  {
+    path: 'newBanner',
+    component:BannerNewComponent
+  },
+  {
+    path:'editBanner/:id',
+    component:BannerNewComponent
   },
   {
     path: 'service',
@@ -165,7 +178,7 @@ const routes : Routes =
 ]
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, ServiceComponent, NewServiceComponent, BlogsComponent, NewBlogsComponent, ApplianceComponent, ApplianceNewComponent, ContactComponent, ContactEditComponent, UserComponent, UserDetailComponent, OfferComponent, OfferNewComponent, OrderComponent, OrderNewComponent, DashboardComponent, CategoryComponent, CategoryNewComponent, ShellComponentComponent],
+  declarations: [AppComponent, HeaderComponent, ServiceComponent, NewServiceComponent, BlogsComponent, NewBlogsComponent, ApplianceComponent, ApplianceNewComponent, ContactComponent, ContactEditComponent, UserComponent, UserDetailComponent, OfferComponent, OfferNewComponent, OrderComponent, OrderNewComponent, DashboardComponent, CategoryComponent, CategoryNewComponent, ShellComponentComponent, BannerComponent, BannerNewComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
