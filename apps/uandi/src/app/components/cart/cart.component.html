@@ -2,12 +2,14 @@
 <div class="not"  *ngIf="!order">
     <div class="container" *ngIf="!otpcheckbox">
         <p-card header="CART" >
+            <p-steps [model]="items" [activeIndex]="index"></p-steps>
             <div class="cond" *ngIf="!checkout">
+                <div class="grid">
                 <div class="services" *ngFor="let list of cart">
                     <div class="service">
-                        <div class="grid">
-                            <div class="data col-8">
+                            <div class="data col-6 col-offset-1">
                                 <img [src]="list.Service_image" alt="">
+                                <button pButton pRipple type="button" icon="pi pi-times" class="m-1 p-button-rounded p-button-danger p-button-outlined" (click)="remove(list._id)"></button>
                                 <ul>
                                     <li>
                                         <span class="name">{{list.Service_name}}</span>
@@ -17,9 +19,9 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="col-2 col-offset-1">
+                            <!-- <div class="col-1">
                                 <button pButton pRipple type="button" icon="pi pi-times" class="m-1 p-button-rounded p-button-danger p-button-outlined" (click)="remove(list._id)"></button>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -29,11 +31,14 @@
                 <button *ngIf="total" pButton pRipple type="button" label="Checkout" class="p-button-outlined p-button-danger" (click)="checkouttoggle()"></button>
             </div>
             <div class="checkout" *ngIf="checkout">
+                <br><br>
                 <button pButton pRipple type="button" icon="pi pi-arrow-left" class="p-button-rounded p-button-outlined" (click)="checkouttoggle()"></button>
     
                 <br>
                 <h2>Please Check the Address & Contact Information</h2>
                 <form action="" [formGroup]="forms">
+                    <br>
+                    <br>
                     <br>
                     <div class="inputs grid">
                         <span class="p-float-label"  >
@@ -60,7 +65,12 @@
         <br>
         <div class='input-fields'>
             <p-card>
+                <p-steps [model]="items" [activeIndex]="index"></p-steps>
+                <br>
+                <br>
                 <h1>OTP Has been sent to your Mobile number no please verify your Mobile number</h1>
+                <br>
+                <br>
                 <form action="" [formGroup]="forms2">
                     <span class="p-float-label">
                         <input id="float-input2" type="text" pInputText formControlName="Otp"> 

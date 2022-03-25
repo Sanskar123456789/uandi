@@ -18,7 +18,7 @@ export class OrderService {
     return this.http.get<Order>(`${this.api}/OrderDetail/${id}`);
   }
 
-  addOrder(Data:{User : string, total_amount: number, Service:service[] | undefined},id:string):Observable<Order>{
+  addOrder(Data:{User : string, total_amount: number, Service:service[] | undefined},id:string):Observable<any>{
     return this.http.post<Order>(`${this.api}/newOrder/${id}`, Data);
   }
   addOnlineOrder(Data : {User : string, total_amount: number, Service:service[] | undefined},id:string):Observable<any>{

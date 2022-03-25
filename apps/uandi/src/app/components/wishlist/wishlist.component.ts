@@ -55,6 +55,12 @@ export class WishlistComponent implements OnInit,OnDestroy {
         localStorage.setItem('wishlist',data.data.User_Wishlist.length);
       })
     }
+    const a = localStorage.getItem('wishlist');
+    if(a=='1'){
+      this.subject.wishlistCount.next(0);
+      localStorage.setItem('wishlist','0')
+      this.router.navigate(['home']);
+    }
   }
 
   addtoCart(id:string| undefined){
@@ -70,6 +76,7 @@ export class WishlistComponent implements OnInit,OnDestroy {
       }
       this.userService.addtoCart(data,userid).pipe(takeUntil(this.endsub$)).subscribe((data)=>{
         this.messageService.add({severity:'success', summary: 'Success', detail: 'Service is added to Cart'});
+        this.remove(id)
         this.subject.cartCount.next(data.data.Cart.length);
         localStorage.setItem('cart',data.data.Cart.length);
       })

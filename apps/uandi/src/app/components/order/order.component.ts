@@ -3,7 +3,7 @@ import {  service } from '@uandi/models';
 import { OrderService } from '@uandi/service';
 import { Subject,timer } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { MessageService } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import {  Router } from '@angular/router';
 declare const Razorpay:any;
 
@@ -15,6 +15,7 @@ declare const Razorpay:any;
 export class OrderComponent implements OnInit {
 @Input() Services: service[] | undefined = [];
 @Input() total = 0;
+items: MenuItem[]=[];
 coins = 0;
 checked=false;
 displayResponsive=false
@@ -23,12 +24,21 @@ offerCode='';
 offerPer = 0;
 OfferMin = 0;
 coupan = 'Add Coupan';
+coupanApplied = false;
+orderValue = 0;
   constructor(private orderService: OrderService,
     private messageService: MessageService,
     private router: Router,
     ) { }
 
   ngOnInit(): void {
+    this.items = [
+      {label: 'Order Summary'},
+      {label: 'Verification'},
+      {label: 'Confirmation'},
+      {label: 'Payment'}
+  ];
+    this.orderValue = this.total;
     const coin =localStorage.getItem('UserCoin');
     if(coin) this.coins = parseInt(coin);
   }
@@ -45,8 +55,9 @@ coupan = 'Add Coupan';
         Offer_code:this.offerCode
       }
       this.orderService.addOrder(data,id).pipe(takeUntil(this.endsub$)).subscribe(data =>{
+        console.log(data);
         if(data){
-          this.messageService.add({severity:'success', summary:'Success', detail:'Your Order has Been Placed Bill will be emailed to you'});
+          this.messageService.add({severity:'success', summary:'Success', detail:data.message});
           if(this.checked){
             localStorage.setItem('UserCoin','0');
           }
@@ -98,10 +109,23 @@ coupan = 'Add Coupan';
   }
 
   gettotalamt(){
-    if(this.checked)
-    this.total = this.total-this.coins;
-    else 
-    this.total = this.total+this.coins;
+    if(this.checked){
+      if(this.coupanApplied){
+        if(this.orderValue>this.coins)
+        this.orderValue = this.orderValue-this.coins;
+      }
+      else{
+        if(this.total>this.coins)
+        this.orderValue = this.total-this.coins;
+      }
+    }
+    else{
+      if(this.coupanApplied){
+        this.orderValue = this.orderValue+this.coins;
+      }else{
+        this.orderValue = this.total+this.coins;
+      }
+    } 
   }
 
   showResponsiveDialog(){
@@ -111,17 +135,26 @@ coupan = 'Add Coupan';
   setOfferCode(code:string){
     this.offerCode = code;
   }
+
   setOfferPer(code:string){
     this.offerPer =parseInt(code);	
   }
+
   setOfferMin(code:string){
     this.displayResponsive=false;
     this.OfferMin = parseInt(code);
     if(this.total > this.OfferMin){
-      this.total= this.total-this.total*(this.offerPer/100);
+      this.orderValue= this.total-this.total*(this.offerPer/100);
       this.coupan = this.offerCode;
+      this.coupanApplied =true;
+      if(this.checked){
+        if(this.orderValue>this.coins)
+        this.orderValue -= this.coins;
+      }
     }else{
-      alert(`to apply this coupan total must more than ${this.OfferMin}`)
+      this.messageService.add({severity:'info', summary: 'Message', detail: `to apply this coupan total must more than ${this.OfferMin}`, sticky: true});
+      // alert(`to apply this coupan total must more than ${this.OfferMin}`)
+      this.coupanApplied =false;
     }
   }
 

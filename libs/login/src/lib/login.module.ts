@@ -11,6 +11,7 @@ import {ButtonModule} from 'primeng/button';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {DropdownModule} from 'primeng/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ToastModule} from 'primeng/toast';
 const routes : Routes =[
   {
     path:'Login',
@@ -22,6 +23,7 @@ const routes : Routes =[
 ]
 @NgModule({
   imports: [
+    ToastModule,
     CommonModule,
     RouterModule.forChild(routes),
     InputTextModule,

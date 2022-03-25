@@ -9,6 +9,7 @@ import { takeUntil } from 'rxjs/operators';
 import {User} from '@uandi/models'
 import{SocialAuthService} from 'angularx-social-login';
 import { GoogleLoginProvider} from 'angularx-social-login';
+import { MessageService } from 'primeng/api';
 
 interface Gender {
   name: string,
@@ -41,7 +42,8 @@ export class UserLoginComponent implements  OnInit,OnDestroy {
     private router:Router,
     private subject: SubjectService,
     ngZone:NgZone,
-    private authService:SocialAuthService
+    private authService:SocialAuthService,
+    private messageService: MessageService,
     ) { 
 
       // window['onSignIn'] = (user: any) => ngZone.run(() =>{
@@ -183,7 +185,8 @@ export class UserLoginComponent implements  OnInit,OnDestroy {
         else{
           this.userService.gUser(this.UserData).pipe(takeUntil(this.endsub$)).subscribe(res=>{
             if(res.success){
-              alert(res.message);
+              // alert(res.message);
+              this.messageService.add({severity:'info', summary: 'Message', detail: res.msg, sticky: true});
             }
             this.stage=2;
             this.forms.controls.emailId.setValue(res.Email);
@@ -192,7 +195,8 @@ export class UserLoginComponent implements  OnInit,OnDestroy {
       }
       else{
         this.c++;
-        alert(`Wrong OTP you have left with ${3-this.c}`);
+        // alert(`Wrong OTP you have left with ${3-this.c}`);
+        this.messageService.add({severity:'info', summary: 'Message', detail: `Wrong OTP you have left with ${3-this.c}`, sticky: true});
         if(this.c==3){
           this.stage=1;
         }
@@ -217,7 +221,8 @@ export class UserLoginComponent implements  OnInit,OnDestroy {
         this.stage = 2;
         this.router.navigate(['/home'])
       }else{
-        alert(token.msg);
+        this.messageService.add({severity:'info', summary: 'Message', detail: token.msg, sticky: true});
+        // alert(token.msg);
       }
     })
   }
@@ -227,7 +232,8 @@ export class UserLoginComponent implements  OnInit,OnDestroy {
       if(data.success){
         this.stage = 4;
       }else{
-        alert("You are not Registered pls register");;
+        this.messageService.add({severity:'info', summary: 'Message', detail: "You are not Registered pls register", sticky: true});
+        // alert("You are not Registered pls register");;
       }
     })
   }
@@ -242,7 +248,8 @@ export class UserLoginComponent implements  OnInit,OnDestroy {
         if(data.success){
           this.stage = 2
         }else{
-          alert(data.msg);
+          this.messageService.add({severity:'info', summary: 'Message', detail: data.msg, sticky: true});
+          // alert(data.msg);
           this.stage1();
         }
       })
@@ -264,7 +271,8 @@ export class UserLoginComponent implements  OnInit,OnDestroy {
 
     this.userService.gUser(data).pipe(takeUntil(this.endsub$)).subscribe(data=>{
       if(data.success){
-        alert(data.message);
+        this.messageService.add({severity:'info', summary: 'Message', detail: data.message, sticky: true});
+        // alert(data.message);
       }
       this.stage=2;
       this.forms.controls.emailId.setValue(data.Email);

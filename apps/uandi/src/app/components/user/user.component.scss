@@ -42,6 +42,7 @@
     .det{
       font-weight: 500;
       width:80%;
+      word-wrap:break-word;
       #data{
         font-weight:200;
         color:rgba(36, 35, 35, 0.774);
@@ -56,7 +57,6 @@
     font-size:22px;
     padding-left: 0px;
     padding-bottom: 0px;
-    margin-left: -40px;
     // margin-bottom: 15px;
   }
   #lis{

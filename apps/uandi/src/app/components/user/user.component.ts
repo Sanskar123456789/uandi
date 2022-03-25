@@ -166,7 +166,7 @@ export class UserComponent implements OnInit,OnDestroy {
   }
   cancel_order(id:string){
     if(this.reason==''){
-      alert("Please provide a reason");
+      this.messageService.add({severity:'info', summary: 'Message', detail: "Please Provide a reason", sticky: true});
       return;
     }
     const data={reason:this.reason}

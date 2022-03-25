@@ -41,7 +41,8 @@ import {AccordionModule} from 'primeng/accordion';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {RatingModule} from 'primeng/rating';
-
+import {StepsModule} from 'primeng/steps';
+import { NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderRouterModule } from "ngx-ui-loader";
 import {
   GoogleLoginProvider,
   FacebookLoginProvider
@@ -50,6 +51,7 @@ import { OrderComponent } from './components/order/order.component';
 import { ServicesComponent } from './components/services/services.component';
 import {CheckboxModule} from 'primeng/checkbox';
 const UI = [
+  StepsModule,
   RatingModule,
   CheckboxModule,
   RadioButtonModule,
@@ -69,7 +71,7 @@ const UI = [
   CardModule,
   ToolbarModule,
   CarouselModule,
-  ProgressSpinnerModule
+  ProgressSpinnerModule,
 ]
 
 const routes : Routes = [{
@@ -126,7 +128,18 @@ const routes : Routes = [{
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, ShellComponent, SidebarComponent, HomepageComponent, ServiceTemplateComponent, FooterComponent, CategoryComponent, ApplianceComponent, WishlistComponent, UserComponent, CartComponent, BlogComponent, CompanyComponent, OffersComponent, OrderComponent, ServicesComponent],
-  imports: [BrowserModule,RouterModule.forRoot(routes),...UI,HttpClientModule,ReactiveFormsModule,FormsModule,LoginModule,SocialLoginModule],
+  imports: [BrowserModule,
+    RouterModule.forRoot(routes),
+    ...UI,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    LoginModule,
+    SocialLoginModule,
+    NgxUiLoaderModule
+    // NgxUiLoaderRouterModule.forRoot({ showForeground: false })
+    // NgxUiLoaderHttpModule.forRoot({ showForeground: true })
+  ],
   providers: [
     MessageService,
     ConfirmationService,

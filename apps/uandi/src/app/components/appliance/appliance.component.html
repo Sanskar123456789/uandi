@@ -1,5 +1,7 @@
 <div class="cond" *ngIf="app">
     <div class="services" *ngFor="let ser of app.Services">
-        <uandi-service-template service={{ser}} ></uandi-service-template>
+        <div class="content">
+            <uandi-service-template service={{ser}} ></uandi-service-template>
+        </div>
     </div>
 </div>

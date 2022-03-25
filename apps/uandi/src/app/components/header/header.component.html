@@ -9,10 +9,10 @@
             <p-button icon="pi pi-user" class="mr-2" routerLink="user"></p-button>
 
             <div class="star-button ml-2 cur" styleClass="p-button-danger">
-                <i class="pi pi-star mr-4 p-text-secondary"          pBadge style="font-size: 1.2rem" [value]="wishlist.toString()"  routerLink="wishlist"></i>
+                <i class="pi pi-star mr-4 p-text-secondary"          pBadge style="font-size: 1.2rem" [value]="wishlist.toString()"  (click)="towish()"></i>
             </div>
             <div class="cart-button ml-2 cur">
-                <i class="pi pi-shopping-cart mr-4 p-text-secondary" pBadge style="font-size: 1.2rem" [value]="cart.toString()" severity="danger"  routerLink="cart"  ></i>
+                <i class="pi pi-shopping-cart mr-4 p-text-secondary" pBadge style="font-size: 1.2rem" [value]="cart.toString()" severity="danger"  (click)="tocart()"  ></i>
             </div>
             
         </div>

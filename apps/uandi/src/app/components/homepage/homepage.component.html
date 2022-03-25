@@ -15,12 +15,13 @@
         </div>
     </ng-template>
 </p-carousel>
-<img src="assets/photos/banner.png" alt="banner" id="img">
-<!-- <uandi-service-template></uandi-service-template> -->
 
+<img src="assets/photos/banner.png" alt="banner" id="img">
+<br>
+<br>
 <p-carousel [value]="app" class="screen" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1" [circular]="true" *ngIf="app" responsiveLayout="scroll">
     <ng-template pTemplate="header">
-        <h5>Appliances</h5>
+        <h3>Appliances</h3>
     </ng-template>
     <ng-template let-app pTemplate="item" class="padding">
         <div class="app" (click)="showAppliance(app._id)">
@@ -39,7 +40,7 @@
 
 <p-carousel [value]="cat" class="screen" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1" [circular]="true" *ngIf="cat" responsiveLayout="scroll">
     <ng-template pTemplate="header">
-        <h5>Category</h5>
+        <h3>Category</h3>
     </ng-template>
     
     <ng-template let-app pTemplate="item" class="padding">

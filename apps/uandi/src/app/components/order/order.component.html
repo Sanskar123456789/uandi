@@ -1,6 +1,7 @@
 <br>
 <br>
-<p-card header="Order Summary" [subheader]="'Your total amount is '+total.toString()" *ngIf="Services">
+<p-card header="Order Summary" [subheader]="'Your total amount is '+orderValue.toString()" *ngIf="Services">
+    <p-steps [model]="items" [activeIndex]="3"></p-steps>
     <p-table [value]="Services" responsiveLayout="scroll">
         <ng-template pTemplate="header">
             <tr>
@@ -43,10 +44,12 @@
         <p-accordion>
             <p-accordionTab header="Net Banking">
                <h4>Place Order to continue with net banking</h4>
+               <br>
                <p-button label="Place Order" id="rzp-button1" (click)="generateOnlineOrder()"></p-button>
             </p-accordionTab>
             <p-accordionTab header="Pay after delivery">
                 <h4>Place Order to continue with this method</h4>
+                <br>
                <p-button label="Place Order" (click)="generateOrder()"></p-button>
             </p-accordionTab>
         </p-accordion>

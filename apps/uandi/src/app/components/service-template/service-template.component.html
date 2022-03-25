@@ -1,26 +1,57 @@
 <p-toast></p-toast>
 <div class="con" *ngIf="data">
-    <p-card header={{data.Service_name}} subheader="{{data.Service_rate| currency:'INR'}}" [style]="{width: '360px'}" styleClass="p-card-shadow">
-        <ng-template pTemplate="header">
-            <img alt={{data.Service_name}} src={{data.Service_image}}>
-        </ng-template>
-        <p-rating id="rateing"[ngModel]="data.Review" [readonly]="true" [stars]="5" [cancel]="false"></p-rating>
-        <br>
-        <button pButton pRipple type="button" icon="pi pi-comments" label="Feedback" class="p-button-outlined" (click)="showfeedback()" ></button>
-
-        <p-dialog header="Feedbacks" [(visible)]="displayPosition" position="top" [modal]="true" [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
-        <ul *ngFor="let feed of data.Feedback">
-            <li>{{feed}}</li>
-            <hr>
-        </ul>
-        <ng-template pTemplate="footer">
-            <p-button icon="pi pi-check" (click)="displayPosition=false" label="Ok" styleClass="p-button-text"></p-button>
-        </ng-template>
-</p-dialog>
-        <p>{{data.Service_description}}</p>
-        <ng-template pTemplate="footer">
-            <p-button label="Add To Cart" icon="pi pi-shopping-cart" (click)="addtoCart(data._id)"></p-button>
-            <p-button label="Add To Wish List" icon="pi pi-star" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}" (click)="wishlist(data._id)"></p-button>
-        </ng-template>
-    </p-card>
+    <div class="mobile">
+        <p-card header={{data.Service_name}} subheader="{{data.Service_rate| currency:'INR'}}" [style]="{width: '260px'}" styleClass="p-card-shadow">
+            <ng-template pTemplate="header">
+                <img alt={{data.Service_name}} src={{data.Service_image}}>
+            </ng-template>
+            <p>{{data.Service_description}}</p>
+            <br>
+            <p-rating id="rateing"[ngModel]="data.Review" [readonly]="true" [stars]="5" [cancel]="false"></p-rating>
+            <br>
+            <button pButton pRipple type="button" icon="pi pi-comments" label="Feedback" class="p-button-outlined" (click)="showfeedback()" ></button>
+    
+            <p-dialog header="Feedbacks" [(visible)]="displayPosition" position="top" [modal]="true" [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+                <ul *ngFor="let feed of data.Feedback">
+                    <li>{{feed}}</li>
+                    <hr>
+                </ul>
+                <ng-template pTemplate="footer">
+                    <p-button icon="pi pi-check" (click)="displayPosition=false" label="Ok" styleClass="p-button-text"></p-button>
+                </ng-template>
+            </p-dialog>
+    
+            <ng-template pTemplate="footer">
+                <p-button label="Add To Cart" icon="pi pi-shopping-cart" (click)="addtoCart(data._id)" [style]="{'margin-left': '.3em' , width:'100%','margin-right': '.5em'}"></p-button>
+                <p-button label="Add To Wish List" icon="pi pi-star" styleClass="p-button-secondary"   [style]="{'margin-left': '.3em' , width:'100%','margin-right': '.5em','margin-top': '.5em'}" (click)="wishlist(data._id)"></p-button>
+            </ng-template>
+        </p-card>
+    </div>
+    <div class="pc">
+        <p-card header={{data.Service_name}} subheader="{{data.Service_rate| currency:'INR'}}" [style]="{width: '360px'}" styleClass="p-card-shadow">
+            <ng-template pTemplate="header">
+                <img alt={{data.Service_name}} src={{data.Service_image}}>
+            </ng-template>
+            <p>{{data.Service_description}}</p>
+            <br>
+            <p-rating id="rateing"[ngModel]="data.Review" [readonly]="true" [stars]="5" [cancel]="false"></p-rating>
+            <br>
+            <button pButton pRipple type="button" icon="pi pi-comments" label="Feedback" class="p-button-outlined" (click)="showfeedback()" ></button>
+    
+            <p-dialog header="Feedbacks" [(visible)]="displayPosition" position="top" [modal]="true" [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+                <ul *ngFor="let feed of data.Feedback">
+                    <li>{{feed}}</li>
+                    <hr>
+                </ul>
+                <ng-template pTemplate="footer">
+                    <p-button icon="pi pi-check" (click)="displayPosition=false" label="Ok" styleClass="p-button-text"></p-button>
+                </ng-template>
+            </p-dialog>
+    
+            <ng-template pTemplate="footer">
+                <p-button label="Add To Cart" icon="pi pi-shopping-cart" (click)="addtoCart(data._id)" [style]="{'margin-left': '.3em' , width:'100%','margin-right': '.5em'}"></p-button>
+                <p-button label="Add To Wish List" icon="pi pi-star" styleClass="p-button-secondary"   [style]="{'margin-left': '.3em' , width:'100%','margin-right': '.5em','margin-top': '.5em'}" (click)="wishlist(data._id)"></p-button>
+            </ng-template>
+        </p-card>
+    </div>
 </div>

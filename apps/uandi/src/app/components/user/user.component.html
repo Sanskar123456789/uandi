@@ -5,6 +5,7 @@
         <button pButton pRipple type="button" icon="pi pi-sign-out" class="p-button-rounded p-button-outlined ml-2" (click)="signOut()"></button>
         <div class="personal-details">
             <h3 class="pd">Personal Details</h3>
+            <br><br>
             <div class="grid de">
                 <p-avatar [label]="label" styleClass="mr-2" size="large" [style]="{'background-color':'#2196F3', 'color': '#ffffff'}" shape="circle"></p-avatar>
                 &nbsp;&nbsp;
@@ -90,6 +91,8 @@
             <div class="caseWishlistempty">
                 <h4 *ngIf="wish.length===0" class="pd"> Your Wishlist is empty</h4>
                 <ul *ngIf="wish.length>0">
+                    <br>
+                    <br>
                     <h4 class="pd1">Wishlist</h4>
                     <p-table [value]="wish" responsiveLayout="scroll">
                         <ng-template pTemplate="header">
