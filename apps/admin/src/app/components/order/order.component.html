@@ -27,6 +27,7 @@
                     <th>total_amount</th>
                     <th>Payment Status</th>
                     <th>date</th>
+                    <th>Schdule date</th>
                     <th></th>
                 </tr>
             </ng-template>
@@ -50,7 +51,7 @@
                     </td>
     
                     <td>{{Order.date | date:'short'}}</td>
-    
+                    <td>{{Order.Scheduled_date | date:'mediumDate'}}</td>
                     <td>
                         <p-button label="See details" icon="pi pi-search" (click)="toseeDetails(Order._id)"></p-button>
                     </td>

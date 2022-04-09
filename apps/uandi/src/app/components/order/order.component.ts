@@ -15,6 +15,7 @@ declare const Razorpay:any;
 export class OrderComponent implements OnInit {
 @Input() Services: service[] | undefined = [];
 @Input() total = 0;
+@Input() date :Date|undefined
 items: MenuItem[]=[];
 coins = 0;
 checked=false;
@@ -26,12 +27,14 @@ OfferMin = 0;
 coupan = 'Add Coupan';
 coupanApplied = false;
 orderValue = 0;
+reduced= false;
   constructor(private orderService: OrderService,
     private messageService: MessageService,
     private router: Router,
     ) { }
 
   ngOnInit(): void {
+    console.log(this.date);
     this.items = [
       {label: 'Order Summary'},
       {label: 'Verification'},
@@ -52,7 +55,8 @@ orderValue = 0;
         total_amount: 0,
         Service:this.Services,
         coins:this.checked,
-        Offer_code:this.offerCode
+        Offer_code:this.offerCode,
+        Scheduled_date:this.date
       }
       this.orderService.addOrder(data,id).pipe(takeUntil(this.endsub$)).subscribe(data =>{
         console.log(data);
@@ -78,7 +82,8 @@ orderValue = 0;
         total_amount: 0,
         Service:this.Services,
         coins: this.checked,
-        Offer_code:this.offerCode
+        Offer_code:this.offerCode,
+        Scheduled_date:this.date
       }
       this.orderService.addOnlineOrder(data,id).pipe(takeUntil(this.endsub$)).subscribe(data => {
         const options = {
@@ -113,16 +118,20 @@ orderValue = 0;
       if(this.coupanApplied){
         if(this.orderValue>this.coins)
         this.orderValue = this.orderValue-this.coins;
+        this.reduced = true
       }
       else{
         if(this.total>this.coins)
         this.orderValue = this.total-this.coins;
+        this.reduced = true
       }
     }
     else{
       if(this.coupanApplied){
+        if(this.reduced)
         this.orderValue = this.orderValue+this.coins;
       }else{
+        if(this.reduced)
         this.orderValue = this.total+this.coins;
       }
     } 

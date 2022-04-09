@@ -45,6 +45,10 @@
                             <input id="float-input3" type="text" class="ml-2" pInputText formControlName="Phone_no" minlength="10" maxlength="10"> 
                             <label for="float-input3">Phone Number</label>
                         </span>
+                        <div class="col-12">
+                            <h3>Schedule</h3>
+                            <p-calendar formControlName="date" (onSelect)="validateDate()" [inline]="true" [showWeek]="true"></p-calendar>
+                        </div>
                         <div class="col-12"></div>
                         <div class="col-12"></div>
                         <div class="col-12"></div>
@@ -84,6 +88,6 @@
         </div>
     </div>
 </div>
-<div class="order" *ngIf="order">
-    <uandi-order [Services]="cart" [total]="total"></uandi-order>
+<div class="order" *ngIf="!order">
+    <uandi-order [Services]="cart" [total]="total" [date]="forms.controls.date.value"></uandi-order>
 </div>

@@ -7,6 +7,7 @@ import { MessageService } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {MenuItem} from 'primeng/api';
+import { type } from 'os';
 
 @Component({
   selector: 'uandi-cart',
@@ -28,10 +29,12 @@ export class CartComponent implements OnInit,OnDestroy {
   checkout = false;
   continuestate = false;
   index = 0;
-  count = 0;
+  count = 0; 
+
   constructor(private userService: UserService,private messageService: MessageService,private subject:SubjectService,private formbuilder:FormBuilder,private router:Router) { }
 
   ngOnInit(): void {
+
     this.items = [
       {label: 'Order Summary'},
       {label: 'Verification'},
@@ -48,6 +51,7 @@ export class CartComponent implements OnInit,OnDestroy {
     this.forms = this.formbuilder.group({
       Phone_no : ['',Validators.required],
       Address : ['', Validators.required],
+      date: ['', Validators.required]
     })
   }
 
@@ -161,7 +165,9 @@ export class CartComponent implements OnInit,OnDestroy {
   }
   
   continue(){
-    if(this.forms.invalid) return
+    if(this.forms.invalid) {
+      this.messageService.add({severity:'info', summary: 'Message', detail: "Please fill all the value"});
+    }
     else{
     const pn = `91${this.forms.controls.Phone_no.value}`
     this.otpcheckbox = true;
@@ -213,6 +219,29 @@ export class CartComponent implements OnInit,OnDestroy {
         }
       })
     }
+    }
+  }
+
+  validateDate(){
+    console.log('in');
+    const date = this.forms.controls.date.value
+    if(date){
+      const selectedDate = date.getDate()
+      const selectedMonth = date.getMonth()
+      const selectedYear = date.getFullYear()
+      const today =new  Date();
+      if(selectedYear < today.getFullYear()){
+        this.messageService.add({severity:'info', summary: 'Message', detail: "Please enter a valid date"});
+        this.forms.controls.date.setValue(null);
+      }
+      if(selectedYear == today.getFullYear() && selectedMonth < today.getMonth()){
+        this.messageService.add({severity:'info', summary: 'Message', detail: "Please enter a valid date"});
+        this.forms.controls.date.setValue(null);
+      }
+      if(selectedYear == today.getFullYear() && selectedMonth == today.getMonth() && selectedDate < today.getDate()){
+        this.messageService.add({severity:'info', summary: 'Message', detail: "Please enter a valid date"});
+        this.forms.controls.date.setValue(null);
+      }
     }
   }
 }

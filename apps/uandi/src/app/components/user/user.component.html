@@ -35,6 +35,7 @@
                             <th>Total</th>
                             <th>Payment Status</th>
                             <th>Mode Of Payment</th>
+                            <th>Scheduled on</th>
                             <th></th>
                         </tr>
                     </ng-template>
@@ -48,6 +49,7 @@
                             <td>{{order.isPaid}}</td>
                             <td *ngIf="order.RazorpayOrder_id">Online</td>
                             <td *ngIf="!order.RazorpayOrder_id">Offline</td>
+                            <td>{{order.Scheduled_date | date:'mediumDate'}}</td>
                             <td *ngIf="order.isPaid && order.Order_Status==='Completed' || order.Order_Status==='Cancel';else elseblock1">
                                 <button pButton pRipple type="button" label="Cancel" class="p-button-danger" disabled="true"></button>
                             </td>

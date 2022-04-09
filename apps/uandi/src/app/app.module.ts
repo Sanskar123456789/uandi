@@ -50,8 +50,10 @@ import {
 import { OrderComponent } from './components/order/order.component';
 import { ServicesComponent } from './components/services/services.component';
 import {CheckboxModule} from 'primeng/checkbox';
+import {CalendarModule} from 'primeng/calendar';
 const UI = [
   StepsModule,
+  CalendarModule,
   RatingModule,
   CheckboxModule,
   RadioButtonModule,

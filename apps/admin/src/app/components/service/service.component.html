@@ -26,7 +26,7 @@
                 <tr>
                     <td>{{service.Service_name}}</td>
                     <td><img [src]= service.Service_image [alt]="service.Service_name" width="100" class="p-shadow-4" /></td>
-                    <td>{{service.Service_rate | currency:'INR'}}</td>
+                    <td>{{service.Service_rate/100 | currency:'INR'}}</td>
                     
                     <td *ngIf="service.Is_Service_appliance">
                         <p-tag styleClass="p-mr-2" icon="pi pi-check" severity="success"></p-tag>
