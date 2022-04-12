@@ -1,15 +1,24 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
-import {Order} from '@uandi/models';
-import {OrderService} from '@uandi/service';
+import {Order, ServiceMan} from '@uandi/models';
+import {OrderService,ServicemanService} from '@uandi/service';
 import { MessageService } from 'primeng/api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { service } from '@uandi/models';
+
+interface order {
+
+    Services?:service,
+    iscompleted?:boolean,
+    isAssignedTo?:ServiceMan
+}
+
 interface Codes {
   name: string,
   code: string
 }
+
 @Component({
   selector: 'uandi-order-new',
   templateUrl: './order-new.component.html',
@@ -22,17 +31,21 @@ export class OrderNewComponent implements OnInit,OnDestroy {
     total_amount: 0
   };
   
-  serv : service[] =[];
+  servicePartner:ServiceMan[] = [];
+  serv:order[]=[];
   status: Codes[]=[];
   Order_Status="";
   isCompleted=false;
   id="";
   isPaid = false;
   endsub$:Subject<any> = new Subject();
-
+  displayPosition = false ;
+  position= 'top';
+  serviceid='';
   constructor(private messageService: MessageService ,
               private ser:OrderService,
-              private routes:ActivatedRoute
+              private routes:ActivatedRoute,
+              private service:ServicemanService
               ) {
                 this.status = [
                   {name: 'Placed', code: 'Placed'},
@@ -76,7 +89,6 @@ export class OrderNewComponent implements OnInit,OnDestroy {
       this.isCompleted=true;
     }
     if(!this.isCompleted){
-      console.log(this.Order_Status);
       if(this.Order_Status=="Completed"){
         this.Order_Status="Processed";
       }
@@ -98,6 +110,34 @@ export class OrderNewComponent implements OnInit,OnDestroy {
       this.messageService.add({severity:'success', summary: 'Success', detail: 'Order details has been updated'});
     })
   }
+
+  showPositionDialog(id:string,serviceId:string) {
+    this.serviceid = serviceId;
+    this.service.getRelatedService(id).pipe(takeUntil(this.endsub$)).subscribe((data=>{
+      if(data.status){
+        this.servicePartner = data.data
+        
+      }else{
+        this.messageService.add({severity:'Error', summary: '404', detail: data.message});
+      }
+    }))
+    this.displayPosition = true;
+}
+
+assignTask(Servicemanid:string| undefined,Speciality:any){
+  
+  if(Speciality && Servicemanid){
+    const Data = {
+      ServiceId:this.serviceid,
+      ServiceManId:Servicemanid
+    }
+    
+    this.ser.AssignTask(this.id,Data).pipe(takeUntil(this.endsub$)).subscribe(() => {
+      this._getOrder();
+    })
+  }
+  this.displayPosition = false;
+}
 
 }
 

@@ -138,9 +138,9 @@ const routes : Routes = [{
     FormsModule,
     LoginModule,
     SocialLoginModule,
-    NgxUiLoaderModule
-    // NgxUiLoaderRouterModule.forRoot({ showForeground: false })
-    // NgxUiLoaderHttpModule.forRoot({ showForeground: true })
+    NgxUiLoaderModule,
+    NgxUiLoaderRouterModule.forRoot({ showForeground: false }),
+    NgxUiLoaderHttpModule.forRoot({ showForeground: true })
   ],
   providers: [
     MessageService,

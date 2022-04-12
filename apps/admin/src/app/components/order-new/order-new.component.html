@@ -53,23 +53,62 @@
                     <th>Price</th>
                     <th>For a appliance</th>
                     <th>Description</th>
+                    <th>Assigned To</th>
+                    <th>Is completed</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-service>
                 <tr>
-                    <td>{{service.Service_name}}</td>
-                    <td><img [src]= service.Service_image [alt]="service.Service_name" width="100" class="p-shadow-4" /></td>
-                    <td>{{service.Service_rate | currency:'INR'}}</td>
+                    <td>{{service.Services.Service_name}}</td>
+                    <td><img [src]= service.Services.Service_image [alt]="service.Services.Service_name" width="100" class="p-shadow-4" /></td>
+                    <td>{{service.Services.Service_rate | currency:'INR'}}</td>
                     
-                    <td *ngIf="service.Is_Service_appliance">
+                    <td *ngIf="service.Services.Is_Service_appliance">
                         <p-tag styleClass="p-mr-2" icon="pi pi-check" severity="success"></p-tag>
                     </td>
-                    <td *ngIf="!service.Is_Service_appliance">
+                    <td *ngIf="!service.Services.Is_Service_appliance">
                         <p-tag styleClass="p-mr-2" icon="pi pi-times" severity="danger"></p-tag>
                     </td>
                     <td>
-                        {{service.Service_description}}
+                        {{service.Services.Service_description}}
                     </td>
+                    <td>
+                        <div *ngIf="!service.isAssignedTo">
+                            <button pButton pRipple type="button" label="Assign" (click)="showPositionDialog(service.Services._id,service._id)" class="p-button-raised p-button-text"></button>
+                            <p-dialog header="Service Partner Details" [(visible)]="displayPosition" [position]="position" [modal]="true" [style]="{width: '50vw'}" [draggable]="false" [resizable]="true">
+                                <div *ngFor="let data of servicePartner">
+                                    <p-card>
+                                        Name : {{data?.Name}}<br>
+                                        Phone : {{data?.Phone_no}}<br>
+                                        Address: {{data?.Address}}<br>
+                                        <br>
+                                        <button pButton pRipple type="button" label="Assign" class="p-button-raised p-button-warning p-button-text" (click)="assignTask(data?._id,data?.Speciality)"></button>
+
+                                    </p-card>
+                                </div>
+                                <ng-template pTemplate="footer">
+                                    <p-button icon="pi pi-check" (click)="displayPosition=false" label="Ok" styleClass="p-button-text"></p-button>
+                                </ng-template>
+                            </p-dialog>
+
+                        </div>
+                        <div *ngIf="service.isAssignedTo">
+                                Name : {{service.isAssignedTo.Name}}<br>
+                                Email : {{service.isAssignedTo.Email}}<br>
+                                Phone Number : {{service.isAssignedTo.Phone_no}}<br>
+                                Address : {{service.isAssignedTo.Address}}<br>
+                                Gender : {{service.isAssignedTo.Gender}}<br>
+                        </div>
+                    </td>
+                    
+                        
+                    <td *ngIf="service.iscompleted">
+                        <p-tag styleClass="p-mr-2" icon="pi pi-check" severity="success"></p-tag>
+                    </td>
+                    <td *ngIf="!service.iscompleted">
+                        <p-tag styleClass="p-mr-2" icon="pi pi-times" severity="danger"></p-tag>
+                    </td>
+                
                 </tr>
             </ng-template>
         </p-table>

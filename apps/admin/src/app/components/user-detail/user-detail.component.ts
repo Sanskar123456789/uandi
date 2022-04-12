@@ -8,7 +8,6 @@ import { takeUntil } from 'rxjs/operators';
 import { service } from '@uandi/models';
 
 
-
 @Component({
   selector: 'uandi-user-detail',
   templateUrl: './user-detail.component.html',
@@ -61,7 +60,6 @@ export class UserDetailComponent implements OnInit,OnDestroy {
 
 private _caltotal(){
     if(this.orders.length==0){
-      console.log("No orders");
       return;
     }else{
       for(let i=0;i<this.orders.length;i++){

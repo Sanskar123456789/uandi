@@ -1,0 +1,62 @@
+<div class="user p-card" *ngIf="data; else elseblock">
+    <div class="personal-details">
+        <h3 class="pd">Personal Details</h3>
+        <div class="grid de">
+            <div class="col-4 det">Name  : <span id="data">{{data.Name}}</span></div>
+            <div class="col-4 det">Email :<span id="data">{{data.Email}}</span></div>
+            <div class="col-4 det">Phone :<span id="data">{{data.Phone_no}}</span></div>
+
+            <div class="col-4 det">Gender  :<span id="data">{{data.Gender}}</span></div>
+            <div class="col-4 det">date    :<span id="data">{{data.date | date}}</span></div>
+            <div class="col-4 det">Address :<span id="data">{{data.Address}}</span></div>
+            <div class="col-4 det">Speciality :<span id="data">{{data.Speciality?.Service_name}}</span></div>
+        </div>
+    </div>
+    <div class="Order-details">
+        <h3 class="pd">Assigned Order</h3>
+        <div>
+            <h4 *ngIf="orders.length===0"> No Assigned Order History</h4>
+        </div>
+        <div *ngIf="orders.length!==0">
+            <p-table [value]="orders" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Order Status</th>
+                        <th>User Data</th>
+                        <th>Services Ordered</th>
+                        <th>Total</th>
+                        <th>Payment Status</th>
+                        
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-order>
+                    <tr>
+                        <td>{{order.Order_Status}}</td>
+                        <td>
+                            {{order.User.Name}}<br>
+                            {{order.User.Email}}<br>
+                            {{order.User.Phone_no}}<br>
+                        </td>
+                        <td>
+                            {{data.Speciality?.Service_name}}
+                        </td>
+                        <td>{{order.total_amount/100 | currency:'INR'}}</td>
+                        <td *ngIf="order.isPaid">
+                            <p-tag styleClass="p-mr-2" icon="pi pi-check" severity="success"></p-tag>
+                        </td>
+                        <td *ngIf="!order.isPaid">
+                            <p-tag styleClass="p-mr-2" icon="pi pi-times" severity="danger"></p-tag>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        
+    </div>
+  
+</div>
+<ng-template #elseblock>
+    <div class="spinner">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+</ng-template>

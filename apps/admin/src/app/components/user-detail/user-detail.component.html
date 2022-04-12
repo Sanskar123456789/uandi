@@ -29,13 +29,13 @@
                 <tr>
                     <td>{{order.Order_Status}}</td>
                     <td>
-                        <p *ngFor="let s of order.Service">{{s.Service_name}}</p>
+                        <p *ngFor="let s of order.Service">{{s.Services.Service_name}}</p>
                     </td>
-                    <td>{{order.total_amount}}</td>
+                    <td>{{order.total_amount/100 | currency:'INR'}}</td>
                 </tr>
             </ng-template>
         </p-table>
-        <h2 class="pd">Total Sales to this user is {{total}}</h2> 
+        <h2 class="pd">Total Sales to this user is {{total/100 | currency:'INR'}}</h2> 
     </div>
     <div class="wishlist">
         <div class="caseWishlistempty">

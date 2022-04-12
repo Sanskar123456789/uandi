@@ -47,10 +47,16 @@ import { LoginModule } from '@uandi/login';
 import { ShellComponentComponent } from './components/shell-component/shell-component.component';
 import {AuthGuardService, JwtinterceptorInterceptor} from '@uandi/service';
 import { BannerComponent } from './components/banner/banner.component';
-import { BannerNewComponent } from './components/banner-new/banner-new.component'
-
+import { BannerNewComponent } from './components/banner-new/banner-new.component';
+import { ServicemanComponent } from './components/serviceman/serviceman.component';
+import { ServicemanNewComponent } from './components/serviceman-new/serviceman-new.component'
+import {DialogModule} from 'primeng/dialog';
+import {RadioButtonModule} from 'primeng/radiobutton';
+import { ServicemanDetailsComponent } from './components/serviceman-details/serviceman-details.component';
 const UI = [
+  DialogModule,
   DropdownModule,
+  RadioButtonModule,
   ChartModule,
   ProgressSpinnerModule,
   ConfirmDialogModule,
@@ -172,13 +178,26 @@ const routes : Routes =
   {
     path:"NewOrder/:id",
     component:OrderNewComponent
+  },
+  {
+    path:"ServiceMan",
+    component:ServicemanComponent
+  },{
+    path:"ServiceMan/:id",
+    component:ServicemanNewComponent
+  },{
+    path:"newserviceMan",
+    component:ServicemanNewComponent
+  },{
+    path:"ServiceManDetails/:id",
+    component:ServicemanDetailsComponent
   }
   ]
   }
 ]
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, ServiceComponent, NewServiceComponent, BlogsComponent, NewBlogsComponent, ApplianceComponent, ApplianceNewComponent, ContactComponent, ContactEditComponent, UserComponent, UserDetailComponent, OfferComponent, OfferNewComponent, OrderComponent, OrderNewComponent, DashboardComponent, CategoryComponent, CategoryNewComponent, ShellComponentComponent, BannerComponent, BannerNewComponent],
+  declarations: [AppComponent, HeaderComponent, ServiceComponent, NewServiceComponent, BlogsComponent, NewBlogsComponent, ApplianceComponent, ApplianceNewComponent, ContactComponent, ContactEditComponent, UserComponent, UserDetailComponent, OfferComponent, OfferNewComponent, OrderComponent, OrderNewComponent, DashboardComponent, CategoryComponent, CategoryNewComponent, ShellComponentComponent, BannerComponent, BannerNewComponent, ServicemanComponent, ServicemanNewComponent, ServicemanDetailsComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

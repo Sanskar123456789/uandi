@@ -13,3 +13,4 @@ export * from './lib/service/auth-guard.service';
 export * from './lib/service/user-auth-guard.service';
 export * from './lib/service/subject.service';
 export * from './lib/service/jwtinterceptor.interceptor';
+export * from './lib/service/serviceman.service';

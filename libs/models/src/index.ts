@@ -8,3 +8,4 @@ export * from './lib/models/Order';
 export * from './lib/models/Offer';
 export * from './lib/models/categorey';
 export * from './lib/models/Banner';
+export * from './lib/models/serviceman';

@@ -80,6 +80,11 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/Login']);
   }
 
+  toServiceMan(){
+    this.z=0;
+    this.router.navigate(['/ServiceMan']);
+  }
+
   toggle(){
     if(this.z==0){
       this.z = 1;

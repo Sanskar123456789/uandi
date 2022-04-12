@@ -5,10 +5,12 @@
         <br><br>
     </div> -->
 <br><br>
+<p-button label="New" icon="pi pi-pencil" (click)="newServiceMan()"></p-button>
+<br><br>
         <p-table [value]="data" responsiveLayout="scroll">
             <ng-template pTemplate="caption">
                 <div class="p-d-flex p-ai-center p-jc-between">
-                    Users
+                    Contact
                 </div>
             </ng-template>
             <ng-template pTemplate="header">
@@ -18,9 +20,9 @@
                     <th>Phone_no</th>
                     <th>Address</th>
                     <th>Gender</th>
-                    <th>isAdmin</th>
                     <th>date</th>
-                    <th>See details</th>
+                    <th>Speciality</th>
+                    <th></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-user>
@@ -30,23 +32,18 @@
                     <td>{{user.Phone_no}}</td>
                     <td>{{user.Address}}</td>
                     <td>{{user.Gender}}</td>
-
-                    <td *ngIf="user.isAdmin">
-                        <p-tag styleClass="p-mr-2" icon="pi pi-check" severity="success"></p-tag>
-                    </td>
-                    <td *ngIf="!user.isAdmin">
-                        <p-tag styleClass="p-mr-2" icon="pi pi-times" severity="danger"></p-tag>
-                    </td>
-                    
                     <td>{{user.date | date}}</td>
+                    <td>{{user.Speciality.Service_name}}</td>
                     <td>
-                        <p-button label="See details" icon="pi pi-search" (click)="toseeDetails(user._id)"></p-button>
+                        <p-button label="Edit" icon="pi pi-pencil" (click)="tonewServiceMan(user._id)"></p-button>
+                        <br><br>
+                        <p-button label="See Details" icon="pi pi-search" (click)="toseeDetails(user._id)" ></p-button>
                     </td>
                 </tr>
             </ng-template>
             <ng-template pTemplate="summary">
                 <div class="p-d-flex p-ai-center p-jc-between">
-                    In total there are {{data ? data.length : 0 }} User(s).
+                    In total there are {{data ? data.length : 0 }} Blog (s).
                 </div>
             </ng-template>
         </p-table>

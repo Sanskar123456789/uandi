@@ -43,7 +43,7 @@
                         <tr>
                             <td>{{order.Order_Status}}</td>
                             <td>
-                                <p *ngFor="let s of order.Service">{{s.Service_name}}</p>
+                                <p *ngFor="let s of order.Service">{{s.Services.Service_name}}</p>
                             </td>
                             <td>{{order.total_amount/100 | currency:'INR'}}</td>
                             <td>{{order.isPaid}}</td>

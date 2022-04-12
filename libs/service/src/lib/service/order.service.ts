@@ -37,4 +37,7 @@ export class OrderService {
   cancelOrder(data:{reason:string},id:string):Observable<any>{
     return this.http.post<any>(`${this.api}/cancel-order/${id}`,data);
   }
+  AssignTask(id:string,Data:{ServiceId:any,ServiceManId:string}):Observable<any>{
+    return this.http.post<any>(`${this.api}/assign-Task/${id}`,Data)
+  }
 }

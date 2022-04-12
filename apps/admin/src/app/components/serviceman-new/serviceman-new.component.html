@@ -1,0 +1,59 @@
+<p-toast></p-toast>
+<br><br>
+<p-card>
+    <div class="service">
+        <div class="container">
+            <div class="form">
+                <form action="" [formGroup]="forms">
+                    <div class="grid">
+                        <div class="col-6">
+                            <span class="p-float-label">
+                                <input id="float-input" type="text" formControlName="Name" pInputText> 
+                                <label for="float-input">ServiceMan Name</label>
+                                <!-- <small *ngIf="forms.Service_name.invalid" class="p-error">Please enter a service name</small> -->
+                            </span>
+                        </div>
+    
+                        <div class="col-6">
+                            <span class="p-float-label">
+                                <input id="float-input" type="text" formControlName="Email" pInputText> 
+                                <label for="float-input">Email</label>
+                                <!-- <small *ngIf="forms.Service_name.invalid" class="p-error">Please enter a service name</small> -->
+                            </span>
+                        </div>
+    
+                        <div class="col-6">
+                            <span class="p-float-label">
+                                <input id="float-input" type="number" formControlName="Phone_no" minlength="10" maxlength="10" pInputText> 
+                                <label for="float-input">Phone_no</label>
+                            </span>                
+                        </div>
+    
+                        <div class="col-6">
+                            <span class="p-float-label">
+                                <textarea id="float-input" formControlName="Address" pInputTextarea class="adj"></textarea>
+                                <label for="float-input">Address</label>
+                            </span>
+                        </div>
+                        
+                        <div class="col-6">
+                            <span class="p-float-label" >
+                                <p-dropdown [options]="genders" formControlName="Gender"  optionLabel="name"></p-dropdown>
+                                <label for="float-input5">Gender</label>
+                            </span>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="field-radiobutton" *ngFor="let name of servicenames">
+                                <p-radioButton name="Speciality" [value]="name._id" formControlName="Speciality" inputId="city1"></p-radioButton>
+                                <label for="city1">{{name.Service_name}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
+                    <p-button label="Submit" (click)="submit()"></p-button>
+                </form>
+            </div>        
+        </div>
+    </div>
+</p-card>
