@@ -47,11 +47,11 @@ export class HomepageComponent implements OnInit,OnDestroy {
     })
   }
 
-  showCategory(id:string){
+  showCategory(id:string | undefined){
     this.route.navigate([`category/${id}`]);
   }
 
-  showAppliance(id:string){
+  showAppliance(id:string | undefined){
     this.route.navigate([`appliance/${id}`]);
   }
   

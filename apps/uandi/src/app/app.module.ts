@@ -51,7 +51,9 @@ import { OrderComponent } from './components/order/order.component';
 import { ServicesComponent } from './components/services/services.component';
 import {CheckboxModule} from 'primeng/checkbox';
 import {CalendarModule} from 'primeng/calendar';
+import {ScrollPanelModule} from 'primeng/scrollpanel';
 const UI = [
+  ScrollPanelModule,
   StepsModule,
   CalendarModule,
   RatingModule,
