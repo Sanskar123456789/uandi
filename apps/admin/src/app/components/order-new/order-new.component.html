@@ -98,6 +98,24 @@
                                 Phone Number : {{service.isAssignedTo.Phone_no}}<br>
                                 Address : {{service.isAssignedTo.Address}}<br>
                                 Gender : {{service.isAssignedTo.Gender}}<br>
+
+                                <br>
+                                <button pButton pRipple type="button" label="Re assign" (click)="showPositionDialog(service.Services._id,service._id)" class="p-button-raised p-button-text"></button>
+                                <p-dialog header="Service Partner Details" [(visible)]="displayPosition" [position]="position" [modal]="true" [style]="{width: '50vw'}" [draggable]="false" [resizable]="true">
+                                    <div *ngFor="let data of servicePartner">
+                                        <p-card>
+                                            Name : {{data?.Name}}<br>
+                                            Phone : {{data?.Phone_no}}<br>
+                                            Address: {{data?.Address}}<br>
+                                            <br>
+                                            <button pButton pRipple type="button" label="Assign" class="p-button-raised p-button-warning p-button-text" (click)="assignTask(data?._id,data?.Speciality)"></button>
+    
+                                        </p-card>
+                                    </div>
+                                    <ng-template pTemplate="footer">
+                                        <p-button icon="pi pi-check" (click)="displayPosition=false" label="Ok" styleClass="p-button-text"></p-button>
+                                    </ng-template>
+                                </p-dialog>
                         </div>
                     </td>
                     

@@ -32,7 +32,9 @@ export class UserComponent implements OnInit,OnDestroy {
   mode = true;
   reason='';
   displayResponsive=false;
-
+  displayResponsive1=false;
+  date:Date=new Date();
+  isValidDate = true;
   constructor(private UserService: UserService,
               private formbuilder:FormBuilder,
               private messageService: MessageService,
@@ -161,9 +163,15 @@ export class UserComponent implements OnInit,OnDestroy {
   
     })
   }
+
   cancelOrder(){
     this.displayResponsive=true;
   }
+  
+  RescheduleOrder(){
+    this.displayResponsive1=true;
+  }
+
   cancel_order(id:string){
     if(this.reason==''){
       this.messageService.add({severity:'info', summary: 'Message', detail: "Please Provide a reason", sticky: true});
@@ -178,5 +186,43 @@ export class UserComponent implements OnInit,OnDestroy {
         this.messageService.add({severity:'error', summary: 'Error', detail: 'Your Order is not canceled'});
       }
     })
+  }
+
+  validateDate(){
+    console.log('in');
+    const date = this.date
+    if(date){
+      const selectedDate = date.getDate()
+      const selectedMonth = date.getMonth()
+      const selectedYear = date.getFullYear()
+      const today =new  Date();
+      if(selectedYear < today.getFullYear()){
+        this.messageService.add({severity:'info', summary: 'Message', detail: "Please enter a valid date"});
+        this.isValidDate = false;
+      }
+      if(selectedYear == today.getFullYear() && selectedMonth < today.getMonth()){
+        this.messageService.add({severity:'info', summary: 'Message', detail: "Please enter a valid date"});
+        this.isValidDate = false;
+      }
+      if(selectedYear == today.getFullYear() && selectedMonth == today.getMonth() && selectedDate < today.getDate()){
+        this.messageService.add({severity:'info', summary: 'Message', detail: "Please enter a valid date"});
+        this.isValidDate = false;
+      }
+    }
+  }
+
+  resdate(id:string){
+    if(this.isValidDate){
+      const Data={Scheduled_date:this.date}
+      this.orderService.RescheduleDate(id,Data).pipe(takeUntil(this.endsub$)).subscribe(res=>{
+        if(res.status){
+          this.messageService.add({severity:'info', summary: 'Message', detail: "Order rescheduled"});
+        }else{
+          this.messageService.add({severity:'error', summary: 'Message', detail: "Order is not rescheduled"});
+        }
+      })
+    }
+
+    this._getUser();
   }
 }

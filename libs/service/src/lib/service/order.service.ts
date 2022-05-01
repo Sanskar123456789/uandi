@@ -40,4 +40,10 @@ export class OrderService {
   AssignTask(id:string,Data:{ServiceId:any,ServiceManId:string}):Observable<any>{
     return this.http.post<any>(`${this.api}/assign-Task/${id}`,Data)
   }
+  RescheduleDate(id:string,Data:{Scheduled_date:Date}):Observable<any>{
+    return this.http.put<any>(`${this.api}/reschedule-Date/${id}`,Data)
+  }
+  RescheduleDateAdmin(id:string,Data:{Scheduled_date:Date}):Observable<any>{
+    return this.http.put<any>(`${this.api}/reschedule-Date-admin/${id}`,Data)
+  }
 }

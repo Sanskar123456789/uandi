@@ -52,10 +52,14 @@
                             <td>{{order.Scheduled_date | date:'mediumDate'}}</td>
                             <td *ngIf="order.isPaid && order.Order_Status==='Completed' || order.Order_Status==='Cancel';else elseblock1">
                                 <button pButton pRipple type="button" label="Cancel" class="p-button-danger" disabled="true"></button>
+                                <br>
+                                <button pButton pRipple type="button" label="Reschedule" class="p-button-danger mt-2" disabled="true"></button>
                             </td>
                             <ng-template #elseblock1>
                                 <td>
                                     <button pButton pRipple type="button" label="Cancel" class="p-button-danger" (click)="cancelOrder()"></button>
+                                    <br>
+                                    <button pButton pRipple type="button" label="Reschedule" class="p-button-danger mt-2" (click)="RescheduleOrder()"></button>
                                 </td>
                                 <p-dialog header="Cancel Order" [(visible)]="displayResponsive" [breakpoints]="{'960px': '75vw'}" [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
                                     <h3>Please provide the reason</h3>
@@ -82,7 +86,18 @@
                                         <p-button (click)="displayResponsive=false" label="Yes" styleClass="p-button-text" (click)="cancel_order(order._id)"></p-button>
                                     </ng-template>
                                 </p-dialog>
+
+                                <p-dialog header="Choose the date" [(visible)]="displayResponsive1" [breakpoints]="{'960px': '75vw'}" [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+
+                                    <p-calendar [(ngModel)]="date" (onSelect)="validateDate()" [inline]="true" [showWeek]="true"></p-calendar>
+                                    
+                                    <ng-template pTemplate="footer">
+                                        <p-button (click)="displayResponsive1=false" label="No" styleClass="p-button-text"></p-button>
+                                        <p-button (click)="displayResponsive1=false" label="Yes" styleClass="p-button-text" (click)="resdate(order._id)"></p-button>
+                                    </ng-template>
+                                </p-dialog>
                             </ng-template>
+
                         </tr>
                     </ng-template>
                 </p-table>
