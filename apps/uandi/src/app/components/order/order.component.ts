@@ -24,7 +24,7 @@ endsub$:Subject<any> = new Subject();
 offerCode='';
 offerPer = 0;
 OfferMin = 0;
-coupan = 'Add Coupan';
+coupan = 'Add Coupon';
 coupanApplied = false;
 orderValue = 0;
 reduced= false;
@@ -114,25 +114,29 @@ reduced= false;
   }
 
   gettotalamt(){
-    if(this.checked){
+    if(!this.checked){
       if(this.coupanApplied){
-        if(this.orderValue>this.coins)
-        this.orderValue = this.orderValue-this.coins;
+        if(this.orderValue>this.coins*100)
+        this.orderValue = this.orderValue-(this.coins*100);
         this.reduced = true
       }
       else{
-        if(this.total>this.coins)
-        this.orderValue = this.total-this.coins;
+        if(this.total>this.coins*100)
+        this.orderValue = this.total-(this.coins*100);
         this.reduced = true
       }
     }
     else{
       if(this.coupanApplied){
-        if(this.reduced)
-        this.orderValue = this.orderValue+this.coins;
+        if(this.reduced){
+          this.orderValue = this.orderValue+(this.coins*100);
+          this.reduced=false;
+        }
       }else{
-        if(this.reduced)
-        this.orderValue = this.total+this.coins;
+        if(this.reduced){
+          this.orderValue = this.total;
+          this.reduced=false;
+        }
       }
     } 
   }
@@ -152,17 +156,17 @@ reduced= false;
   setOfferMin(code:string){
     this.displayResponsive=false;
     this.OfferMin = parseInt(code);
-    if(this.total > this.OfferMin){
+    if(this.total > this.OfferMin*100){  
       this.orderValue= this.total-this.total*(this.offerPer/100);
       this.coupan = this.offerCode;
       this.coupanApplied =true;
       if(this.checked){
-        if(this.orderValue>this.coins)
-        this.orderValue -= this.coins;
+        if(this.orderValue>this.coins*100)
+        this.orderValue -= this.coins*100;
       }
     }else{
-      this.messageService.add({severity:'info', summary: 'Message', detail: `to apply this coupan total must more than ${this.OfferMin}`, sticky: true});
-      // alert(`to apply this coupan total must more than ${this.OfferMin}`)
+      this.messageService.add({severity:'info', summary: 'Message', detail: `to apply this coupon total must more than ${this.OfferMin}`, sticky: true});
+      // alert(`to apply this coupon total must more than ${this.OfferMin}`)
       this.coupanApplied =false;
     }
   }

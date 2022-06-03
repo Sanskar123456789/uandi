@@ -66,6 +66,9 @@ p-toolbar {
   .sidebar {
     display: none;
   }
+  #logo1 {
+    height: 30%;
+  }
 }
 
 @keyframes animate {
@@ -75,4 +78,8 @@ p-toolbar {
   100% {
     width: 70%;
   }
+}
+
+#logo1{
+  margin-left: 40px;
 }

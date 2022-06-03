@@ -1,6 +1,6 @@
 <br>
 <br>
-<p-card header="Order Summary" [subheader]="'Your total amount is '+orderValue.toString()" *ngIf="Services">
+<p-card header="Order Summary" [subheader]="'Your total amount is '+orderValue/100" *ngIf="Services">
     <p-steps [model]="items" [activeIndex]="3"></p-steps>
     <p-table [value]="Services" responsiveLayout="scroll">
         <ng-template pTemplate="header">
@@ -14,7 +14,7 @@
         <ng-template pTemplate="body" let-product>
             <tr>
                 <td>{{product.Service_name}}</td>
-                <td>{{product.Service_rate}}</td>
+                <td>{{product.Service_rate/100}}</td>
                 <td><img [src]="product.Service_image" alt="" style="width: 30%"></td>
                 <td>{{product.Service_description}}</td>
             </tr>

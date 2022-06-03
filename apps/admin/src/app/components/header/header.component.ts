@@ -1,22 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router} from '@angular/router';
+import { OrderService } from '@uandi/service';
+import { MessageService } from 'primeng/api';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'uandi-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit,OnDestroy {
 
+  endsub$:Subject<any> = new Subject();
   z = 1;
   bars: any;
-  constructor(private router : Router, private routes:ActivatedRoute) { 
+  constructor(private router : Router, private routes:ActivatedRoute,private orderService: OrderService,private messageService: MessageService) { 
     this.z = 0;
     this.bars = document.querySelector('.bars')
   }
 
   ngOnInit(): void {
     this.z=0;
+  }
+
+  ngOnDestroy(){
+    this.endsub$.next();
+    this.endsub$.complete();
   }
 
   tohome(): void {
@@ -92,7 +101,13 @@ export class HeaderComponent implements OnInit {
       this.z = 0;
     }
   }
-  
+  cleandb(){
+    this.orderService.cleandb().pipe(takeUntil(this.endsub$)).subscribe((data)=>{
+      console.log(data)
+      this.messageService.add({severity:'success', summary: 'Success', detail: 'Data is Cleaned'});
+    })
+  }
+
 
 
 }

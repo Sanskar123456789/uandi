@@ -15,17 +15,14 @@
                                         <span class="name">{{list.Service_name}}</span>
                                     </li>
                                     <li>
-                                        <span class="rate">{{list.Service_rate | currency:'INR'}}</span>
+                                        <span *ngIf="list.Service_rate" class="rate">{{list.Service_rate/100 | currency:'INR'}}</span>
                                     </li>
                                 </ul>
                             </div>
-                            <!-- <div class="col-1">
-                                <button pButton pRipple type="button" icon="pi pi-times" class="m-1 p-button-rounded p-button-danger p-button-outlined" (click)="remove(list._id)"></button>
-                            </div> -->
                         </div>
                     </div>
                 </div>
-                <h3>Total {{total|currency:'INR'}}</h3>
+                <h3>Total {{total/100|currency:'INR'}}</h3>
                 <br>
                 <br>
                 <button *ngIf="total" pButton pRipple type="button" label="Checkout" class="p-button-outlined p-button-danger" (click)="checkouttoggle()"></button>
@@ -36,30 +33,33 @@
     
                 <br>
                 <h2>Please Check the Address & Contact Information</h2>
+                <br>
+                <br>
+                <br>
                 <form action="" [formGroup]="forms">
-                    <br>
-                    <br>
-                    <br>
                     <div class="inputs grid">
-                        <span class="p-float-label"  >
-                            <input id="float-input3" type="text" class="ml-2" pInputText formControlName="Phone_no" minlength="10" maxlength="10"> 
+                        <span class="p-float-label">
+                            <input *ngIf="level2disabled"  id="float-input3" type="text" class="ml-2" pInputText formControlName="Phone_no" minlength="10" maxlength="10"  [readonly]="true"> 
+                            <input *ngIf="!level2disabled" id="float-input3" type="text" class="ml-2" pInputText formControlName="Phone_no" minlength="10" maxlength="10"> 
                             <label for="float-input3">Phone Number</label>
+                        </span>
+                        <div class="col-12"></div>
+                        <div class="col-12"></div>
+                        <div class="col-12"></div>
+                        <span class="p-float-label col-12">
+                            <textarea *ngIf="level2disabled" id="float-input4" rows="5" cols="30" pInputTextarea [autoResize]="true" formControlName="Address"  [readonly]="true"></textarea>
+                            <textarea *ngIf="!level2disabled" id="float-input4" rows="5" cols="30" pInputTextarea [autoResize]="true" formControlName="Address"></textarea>
+                            <label for="float-input4" id="add">Address</label>
                         </span>
                         <div class="col-12">
                             <h3>Schedule</h3>
                             <p-calendar formControlName="date" (onSelect)="validateDate()" [inline]="true" [showWeek]="true"></p-calendar>
                         </div>
-                        <div class="col-12"></div>
-                        <div class="col-12"></div>
-                        <div class="col-12"></div>
-                        <span class="p-float-label col-12">
-                            <textarea id="float-input4" rows="5" cols="30" pInputTextarea [autoResize]="true" formControlName="Address"></textarea>
-                            <label for="float-input4" id="add">Address</label>
-                        </span>
                     </div>
-                    <p-button label="Update" (click)="update()" class="ml-2"></p-button>
+                    <p-button *ngIf="!level2disabled" label="Update" (click)="update()" class="ml-2"></p-button>
+                    <p-button *ngIf="level2disabled" label="Update" (click)="update()" class="ml-2" [disabled]="true"></p-button>
                     <p-button *ngIf="!continuestate" label="Continue"  class="ml-2"  [disabled]="true"></p-button>
-                    <p-button *ngIf="continuestate" label="Continue" (click)="continue()" class="ml-2"  [disabled]="false"></p-button>
+                    <p-button *ngIf="continuestate"  label="Continue" (click)="continue()" class="ml-2"  [disabled]="false"></p-button>
                 </form>
             </div>
         </p-card>
@@ -88,6 +88,6 @@
         </div>
     </div>
 </div>
-<div class="order" *ngIf="!order">
+<div class="order" *ngIf="order">
     <uandi-order [Services]="cart" [total]="total" [date]="forms.controls.date.value"></uandi-order>
 </div>

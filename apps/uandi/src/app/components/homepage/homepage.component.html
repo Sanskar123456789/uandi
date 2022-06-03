@@ -7,8 +7,8 @@
         </div>
     </p-scrollPanel>
 </div>
-
-<p-carousel [value]="Banner" styleClass="custom-carousel" [numVisible]="1" [numScroll]="1" [circular]="true" [autoplayInterval]="2000" *ngIf="Banner" responsiveLayout="scroll">
+<br>
+<p-carousel [value]="Banner" styleClass="custom-carousel" [numVisible]="1" [numScroll]="1" [circular]="true" [autoplayInterval]="5000" *ngIf="Banner" responsiveLayout="scroll">
     <ng-template pTemplate="header">
     </ng-template>
     <ng-template let-app pTemplate="item" class="padding">
@@ -19,8 +19,7 @@
         </div>
     </ng-template>
 </p-carousel>
-
-<img src="assets/photos/banner.png" alt="banner" id="img">
+<hr>
 <br>
 <br>
 <!-- <p-carousel [value]="app" class="screen" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1" [circular]="true" *ngIf="app" responsiveLayout="scroll">
@@ -60,8 +59,13 @@
     </div>
 </div>
 <br><br>
+<hr><br><br>
+<img src="assets/photos/banner.png" alt="banner" id="img">
+<br><br>
+<hr>
+<br><br>
 <div class="container">
-    <h3>Appliances <br><span>Women's Special, Hair Dressing ....</span></h3>
+    <h3>Categories <br><span>Women's Special, Hair Dressing ....</span></h3>
     <br>
     <div class="appliance">
         <div class="products" *ngFor="let product of cat">

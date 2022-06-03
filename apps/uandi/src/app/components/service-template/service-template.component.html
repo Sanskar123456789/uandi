@@ -1,7 +1,7 @@
 <p-toast></p-toast>
 <div class="con" *ngIf="data">
     <div class="mobile">
-        <p-card header={{data.Service_name}} subheader="{{data.Service_rate| currency:'INR'}}" [style]="{width: '260px'}" styleClass="p-card-shadow">
+        <p-card *ngIf="data.Service_rate" header={{data.Service_name}} subheader="{{data.Service_rate/100| currency:'INR'}}" [style]="{width: '260px'}" styleClass="p-card-shadow">
             <ng-template pTemplate="header">
                 <img alt={{data.Service_name}} src={{data.Service_image}}>
             </ng-template>
@@ -28,7 +28,7 @@
         </p-card>
     </div>
     <div class="pc">
-        <p-card header={{data.Service_name}} subheader="{{data.Service_rate| currency:'INR'}}" [style]="{width: '360px'}" styleClass="p-card-shadow">
+        <p-card *ngIf="data.Service_rate" header={{data.Service_name}} subheader="{{data.Service_rate/100| currency:'INR'}}" [style]="{width: '360px'}" styleClass="p-card-shadow">
             <ng-template pTemplate="header">
                 <img alt={{data.Service_name}} src={{data.Service_image}}>
             </ng-template>

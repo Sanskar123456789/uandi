@@ -7,7 +7,6 @@ import { MessageService } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {MenuItem} from 'primeng/api';
-import { type } from 'os';
 
 @Component({
   selector: 'uandi-cart',
@@ -22,6 +21,7 @@ export class CartComponent implements OnInit,OnDestroy {
   data:User={};
   id="";
   total= 0;
+  level2disabled = false;
   forms!: FormGroup;
   forms2!: FormGroup;
   otpcheckbox = false;
@@ -31,7 +31,11 @@ export class CartComponent implements OnInit,OnDestroy {
   index = 0;
   count = 0; 
 
-  constructor(private userService: UserService,private messageService: MessageService,private subject:SubjectService,private formbuilder:FormBuilder,private router:Router) { }
+  constructor(private userService: UserService,
+              private messageService: MessageService,
+              private subject:SubjectService,
+              private formbuilder:FormBuilder,
+              private router:Router) { }
 
   ngOnInit(): void {
 
@@ -80,6 +84,9 @@ export class CartComponent implements OnInit,OnDestroy {
         this.total_amount();
         this.forms.controls.Phone_no.setValue(data.Phone_no);
         this.forms.controls.Address.setValue(data.Address);
+        if(data.Phone_no!=null && data.Address != ""){
+          this.level2disabled = true;
+        }
         if(this.forms.controls.Address.value=="" || this.forms.controls.Phone_no.value==null || this.forms.controls.Phone_no.value.toString().length <10){
           this.continuestate=false;
         }else{
@@ -131,7 +138,6 @@ export class CartComponent implements OnInit,OnDestroy {
       this.index = 1
     }else{
       this.index = 0
-
     }
     this.checkout = !this.checkout
   }
@@ -158,8 +164,13 @@ export class CartComponent implements OnInit,OnDestroy {
       if(id) {
         id = id.split('"')[1]
         this.userService.updateUser(user,id).pipe(takeUntil(this.endsub$)).subscribe(()=>{
-          this.messageService.add({severity:'success', summary: 'Success', detail: 'data is updated now continue to watch summary'});
+          this.messageService.add({severity:'success', summary: 'Success', detail: 'data is updated now continue furthur'});
+          this.level2disabled = true;
         })
+      }
+      if(this.level2disabled){
+        console.log(this.level2disabled)
+        this.forms.controls['Phone_no'].disable();
       }
     }
   }
@@ -182,13 +193,13 @@ export class CartComponent implements OnInit,OnDestroy {
       this.userService.mobileOtp(data).pipe(takeUntil(this.endsub$)).subscribe((data)=>{
         if(data.success){
           console.log(data);
-          this.messageService.add({severity:'info', summary: 'Message', detail: `${data.msg}`, sticky: true});
+          this.messageService.add({severity:'info', summary: 'Message', detail: `${data.msg}`});
           // alert(data.msg);
           this.index=2; 
           this.otpcheckbox = true;
           this.index=2; 
         }else{
-          this.messageService.add({severity:'info', summary: 'Message', detail: `${data.msg}`, sticky: true});
+          this.messageService.add({severity:'info', summary: 'Message', detail: `${data.msg}`});
           // alert(data.msg);
         }
       })
@@ -211,7 +222,7 @@ export class CartComponent implements OnInit,OnDestroy {
           this.order = !this.order;          
         }else{
           this.count++;
-          this.messageService.add({severity:'info', summary: 'Message', detail: `Wrong OTP`, sticky: true});
+          this.messageService.add({severity:'info', summary: 'Message', detail: `Wrong OTP`});
           if(this.count>=3){
             this.otpcheckbox = !this.otpcheckbox;
             this.index=1;

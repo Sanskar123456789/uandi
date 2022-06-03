@@ -16,6 +16,7 @@
                     <li (click)="toOrder()">Orders</li>
                     <li (click)="toBanner()">Banner</li>
                     <li (click)="toServiceMan()">Service Partners</li>
+                    <li (click)="cleandb()">Cleandb</li>
 
                 </ul>
             </div>
@@ -27,7 +28,8 @@
                 <i class="pi pi-bars bars"(click)="toggle()"></i>
             </div>
             <div class="col-5 -mt-4" >
-                <p> Logo </p>            
+                <p><img src="assets/photos/logo.png" alt="logo" width="25%"
+                    height= "20%" border-radius="2px" id = 'logo1'> </p>            
             </div>
             <div class="col-2">
 
@@ -48,6 +50,8 @@
                     <div class="col-1" class="mr-3 mt-1"><p-button label="Orders"           icon="pi pi-fw pi-book"     styleClass="p-button-info" id="Orders"     (click)="toOrder()"    ></p-button></div>
                     <div class="col-1" class="mr-3 mt-1"><p-button label="Banner"           icon="pi pi-fw pi-book"     styleClass="p-button-info" id="Banner"     (click)="toBanner()"    ></p-button></div>
                     <div class="col-1" class="mr-3 mt-1"><p-button label="Service Partners"           icon="pi pi-fw pi-users"     styleClass="p-button-info" id="ServiceMan"     (click)="toServiceMan()"    ></p-button></div>
+                    <div class="col-1" class="mr-3 mt-1"><p-button label="Clean Db"           icon="pi pi-fw pi-info-circle"     styleClass="p-button-info" id="clean"     (click)="cleandb()"    ></p-button></div>
+                    
                 </div>
             </div>
             

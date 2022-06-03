@@ -46,4 +46,7 @@ export class OrderService {
   RescheduleDateAdmin(id:string,Data:{Scheduled_date:Date}):Observable<any>{
     return this.http.put<any>(`${this.api}/reschedule-Date-admin/${id}`,Data)
   }
+  cleandb():Observable<any>{
+    return this.http.get<any>(`${this.api}/order-not-completed`);
+  }
 }
