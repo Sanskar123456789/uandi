@@ -1,0 +1,11 @@
+[NX Daemon Server] - 2025-10-26T11:13:21.177Z - Started listening on: \\.\pipe\nx\C:\Users\Sanskar\AppData\Local\Temp\723840ddb34e80013a2c\d.sock
+[NX Daemon Server] - 2025-10-26T11:13:21.180Z - [WATCHER]: Subscribed to changes within: C:\Users\Sanskar\Desktop\uandi\uandi (native)
+[NX Daemon Server] - 2025-10-26T11:13:21.187Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2025-10-26T11:13:21.189Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2025-10-26T11:13:21.190Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2025-10-26T11:13:21.193Z - [REQUEST]: Responding to the client. Shutdown initiated
+[NX Daemon Server] - 2025-10-26T11:13:21.194Z - Done responding to the client Shutdown initiated
+[NX Daemon Server] - 2025-10-26T11:13:21.194Z - Handled FORCE_SHUTDOWN. Handling time: 0. Response time: 1.
+[NX Daemon Server] - 2025-10-26T11:13:21.195Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2025-10-26T11:13:21.195Z - [WATCHER]: Stopping the watcher for C:\Users\Sanskar\Desktop\uandi\uandi (sources)
+[NX Daemon Server] - 2025-10-26T11:13:21.195Z - [WATCHER]: Stopping the watcher for C:\Users\Sanskar\Desktop\uandi\uandi (outputs)
