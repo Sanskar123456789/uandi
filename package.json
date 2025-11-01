@@ -7,7 +7,9 @@
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main",
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "StartUser": "npx nx serve uandi",
+    "StartAdmin": "npx nx serve admin --port=4300"
   },
   "private": true,
   "dependencies": {
