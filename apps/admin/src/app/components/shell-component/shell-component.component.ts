@@ -8,10 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShellComponentComponent implements OnInit {
 
-  constructor() { }
+  // constructor() { }
 
   ngOnInit(): void {
-    // console.log("shell");
+    console.log("shell");
   }
 
 }

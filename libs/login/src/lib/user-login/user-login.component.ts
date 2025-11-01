@@ -175,7 +175,7 @@ export class UserLoginComponent implements  OnInit,OnDestroy {
     const data=
     {
       otp:this.forms2.controls.otp.value,
-      User: this.forms1.controls.Email.value,
+      User: this.forms1.controls.Email.value || this.forms.controls.emailId.value,
     }    
     this.userService.checkOTP(data).subscribe(res=>{
       if(res.success){
